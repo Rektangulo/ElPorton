@@ -1,4 +1,5 @@
 @extends('bootstrap')
+@section('page')
 <body class="bg-dark text-white">
 	<nav class="navbar navbar-expand-lg navbar-dark fs-4" style="background-color: #400b96;">
 	  <div class="container-fluid">
@@ -31,4 +32,6 @@
 		</div>
 	  </div>
 	</nav>
+	@yield('content')
 </body>
+@stop

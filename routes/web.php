@@ -16,3 +16,12 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/test', function () {
+    //return view('dashboard.test');
+	return view('dashboard.test');
+});
+
+Route::group(['prefix' => 'admin', 'as' => 'admin.', /*'middleware' => 'admin'*/ ], function () {
+    Route::resource('menus', 'App\Http\Controllers\MenuController');
+});
