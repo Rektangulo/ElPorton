@@ -1,10 +1,12 @@
 @extends('dashboard.layouts.base')
-<head>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-</head>
 @section('content')
-<div <div style="padding-top: 2%;">
+<div style="padding-top: 30px;">
 	<h1 class="text-center mb-4">{{$title}}</h1>
+	@if (session('success'))
+		<div class="alert alert-success mb-0 rounded-0 mb-4">
+			{{ session('success') }}
+		</div>
+	@endif
 	<table class="table table-dark table-hover table-striped text-center fs-5" style="width: 90%; margin: auto;">
 		<thead>
 			<tr>
@@ -52,7 +54,6 @@
 					</td>
 				</tr>
 			@endforeach
-			
 			<!--add button-->
 			<tr>
 				<td colspan="{{count($headers)+1}}" align="center">
