@@ -18,13 +18,13 @@
 		</thead>
 		<tbody class="table-group-divider">
 			@foreach ($data as $row)
-				<tr>
+				<tr data-href="{{ url(request()->path().'/'.$row['id']) }}">
+				<!--<tr>-->
 					@foreach ($headers as $header)
 						<td>{{ $row[$header] }}</td>
 					@endforeach
 					<td>
 						<a class="btn btn-warning" href="{{ str_replace('__id__', $row['id'], $editUrl) }}"><i class="fas fa-pencil-alt"></i></a>
-						<!--<a class="btn btn-danger" href="{{ str_replace('__id__', $row['id'], $deleteUrl) }}">Delete</a>-->
 						
                         <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal{{ $row['id'] }}"><i class="fas fa-trash"></i></button>
 						
@@ -33,18 +33,18 @@
                             <div class="modal-dialog">
                                 <div class="modal-content bg-dark text-white">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="deleteModalLabel{{$row['id']}}">Delete {{ $row['name'] }}</h5>
+                                        <h5 class="modal-title" id="deleteModalLabel{{$row['id']}}">{{ __('headers.delete') }} {{ $row['name'] }}</h5>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                                     </div>
                                     <div class="modal-body">
-                                        Are you sure you want to delete this?
+										{{ __('headers.confirm_delete') }}
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ __('headers.cancel') }}</button>
                                         <form action="{{ str_replace('__id__', $row['id'], $deleteUrl) }}" method="POST">
                                             @csrf
                                             @method('DELETE')
-											<button type="submit" class="btn btn-danger">Delete</button>
+											<button type="submit" class="btn btn-danger">{{ __('headers.delete') }}</button>
                                         </form>
                                     </div>
                                 </div>
@@ -55,13 +55,25 @@
 				</tr>
 			@endforeach
 			<!--add button-->
-			<tr>
+			<tr data-href="{{ url(request()->path().'/create') }}">
 				<td colspan="{{count($headers)+1}}" align="center">
-					<a href="{{ $createUrl }}" class="btn btn-success">Create New <i class="fas fa-plus-square"></i></a>
+					<a href="{{ $createUrl }}" class="btn btn-success">{{ __('headers.create_new') }}<i class="fas fa-plus-square"></i></a>
 				</td>
 			</tr>
 			
 		</tbody>
 	</table>
+	<div class="d-flex justify-content-center my-4">
+		{{ $data->links() }}
+	</div>
 </div>
+<!--clickable rows, disabled on action buttons and when the modal is showing-->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+	$('table').on('click', 'tbody tr', function(event) {
+    if (!$(event.target).closest('button').hasClass('btn') && $('.modal.show').length === 0 && !$(event.target).hasClass('modal')) {
+        window.location.href = $(this).data('href');
+    }
+	});
+</script>
 @stop

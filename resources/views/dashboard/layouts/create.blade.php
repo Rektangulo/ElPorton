@@ -15,7 +15,25 @@
             @if (!in_array($attribute, ['id', 'created_at', 'updated_at']))
                 <div class="form-group mb-4">
                     <label class="fs-5" for="{{ $attribute }}">{{ ucfirst(__('headers.'.$attribute)) }}</label>
-                    <input type="text" id="{{ $attribute }}" name="{{ $attribute }}" value="{{ old($attribute) }}" class="form-control form-control-lg">
+					
+					@if ($attribute === 'image')
+						@php
+							$controller = new App\Http\Controllers\ImageController();
+							$images = $controller->getImages();
+						@endphp
+						<div class="input-group" @isset($disabled) hidden="true" @endisset>
+							<select id="image" name="selected-image" class="form-select fs-5">
+								<option value="">{{ __('headers.select_prompt') }}</option>
+								@foreach ($images as $image)
+									<option value="{{ $image }}" {{ old('selected-image') == $image ? 'selected' : '' }}>{{ $image }}</option>
+								@endforeach
+							</select>
+							<label class="input-group-text" for="image-upload">or upload</label>
+							<input type="file" id="image-upload" name="image" class="form-control">
+						</div>
+					@else
+						<input type="text" id="{{ $attribute }}" name="{{ $attribute }}" value="{{ old($attribute) }}" class="form-control form-control-lg">
+					@endif
                 </div>
             @endif
         @endforeach
@@ -31,6 +49,9 @@
             @foreach ($errors->all() as $error)
                 <li>{{ $error }}</li>
             @endforeach
+			@if (old('image'))
+				<li>{{ __('headers.file_error') }}</li>
+			@endif
         </ul>
     </div>
 @endif

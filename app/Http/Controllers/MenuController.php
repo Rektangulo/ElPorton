@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreMenuRequest;
 use App\Models\Menu;
+use Illuminate\Support\Facades\Storage;
 
 /*
 	TODO refactor headers to the model
@@ -18,7 +19,7 @@ class MenuController extends Controller
     public function index()
     {
         $headers = ['name', 'description', 'price'];
-		$menus = Menu::select('id', 'name', 'description', 'price')->get();
+		$menus = Menu::select('id', 'name', 'description', 'price')->paginate(10);
 		$createUrl = route('admin.menus.create');
 		$editUrl = route('admin.menus.edit', ['menu' => '__id__']);
 		$deleteUrl = route('admin.menus.destroy', ['menu' => '__id__']);
@@ -51,9 +52,20 @@ class MenuController extends Controller
      */
     public function store(StoreMenuRequest $request)
     {
+
 		$menu = new Menu;
 		$data = $request->validated();
-		$menu->fill($data);
+		
+		// Handle file upload
+		if ($request->hasFile('image')) {
+			$movedImage = $request->image->move(public_path('images/public'), $request->image->getClientOriginalName());
+			$menu->image = 'public/'.$request->image->getClientOriginalName();
+		} else if (!empty($request->input('selected-image'))) {
+			// Use the selected image
+			$menu->image = 'public/'.$request->input('selected-image');
+    	}
+		
+		$menu->fill($request->except('image'));
 		$menu->save();
 
 		return redirect()->route('admin.menus.show', ['menu' => $menu->id]);
@@ -89,11 +101,22 @@ class MenuController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(StoreMenuRequest $request, string $id)
+    public function update(StoreMenuRequest $request, String $id)
     {
 		$data = $request->validated();
         $menu = Menu::find($id);
-		$menu->update($request->all());
+		
+		// Handle file upload
+		if ($request->hasFile('image')) {
+			$movedImage = $request->image->move(public_path('images/public'), $request->image->getClientOriginalName());
+			$menu->image = 'public/'.$request->image->getClientOriginalName();
+		} else {
+			// Use the selected image
+			$menu->image = 'public/'.$request->input('selected-image');
+    	}
+
+		$menu->fill($request->except('image'));
+		$menu->save();
 		return redirect()->route('admin.menus.show', ['menu' => $id]);
     }
 
@@ -104,7 +127,7 @@ class MenuController extends Controller
     {
 		$menu = Menu::findOrFail($id);
 		$menu->delete();
-		session()->flash('success', trans('headers.deletedSucess'));
+		session()->flash('success', trans('headers.deletedSuccess'));
 		return redirect()->route('admin.menus.index');
     }
 }
