@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\StoreMenuRequest;
 use App\Models\Menu;
 use App\Models\Image;
+use App\Models\Tag;
 use Illuminate\Support\Facades\Storage;
 use App\Services\ImageUploadService;
 use Illuminate\Http\RedirectResponse;
@@ -37,12 +38,15 @@ class MenuController extends Controller
     public function create()
     {
 		$images = Image::all();
+		$tags = Tag::all();
 		$attributes = ['name', 'description', 'price', 'image_id'];
         return view('dashboard.layouts.create', ['attributes' => $attributes,
 												 'resourceType' => 'menu',
 												 'nextRoute' => 'App\Http\Controllers\MenuController@store',
 												 'returnRoute' => '/admin/menus',
 												 'images' => $images,
+												 'showTags' => '1',
+                                               	 'tags' => $tags,
 											  ]);
     }
 
@@ -72,6 +76,10 @@ class MenuController extends Controller
 		
 		$menu->fill($request->except('image'));
 		$menu->save();
+		
+		// Update tags
+        $tags = $request->input('tags', []);
+        $menu->tags()->sync($tags);
 
 		return redirect()->route('admin.menus.show', ['menu' => $menu->id]);
     }
@@ -88,7 +96,8 @@ class MenuController extends Controller
 											   'nextRoute' => 'App\Http\Controllers\MenuController@update', //?
 											   'returnRoute' => '/admin/menus',
 											   'images' => $images,
-											   'disabled' => '1'
+											   'disabled' => '1',
+											   'showTags' => '1',
 											  ]);
     }
 
@@ -99,11 +108,14 @@ class MenuController extends Controller
     {
 		$menu = Menu::find($id);
 		$images = Image::all();
+		$tags = Tag::all();
     	return view('dashboard.layouts.show', ['resource' => $menu,
 											   'resourceType' => 'menu',
 											   'nextRoute' => 'App\Http\Controllers\MenuController@update',
 											   'returnRoute' => '/admin/menus',
 											   'images' => $images,
+											   'showTags' => 1,
+											   'tags' => $tags,
 											  ]);
     }
 
@@ -130,7 +142,10 @@ class MenuController extends Controller
 			$image = Image::find($request->input('selected-image'));
 			$menu->image()->associate($image);
 		}
-
+		// Update tags
+		$tags = $request->input('tags', []);
+		$menu->tags()->sync($tags);
+		
 		$menu->fill($request->except('image'));
 		$menu->save();
 		return redirect()->route('admin.menus.show', ['menu' => $id]);

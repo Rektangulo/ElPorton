@@ -6,6 +6,8 @@
 		- 'nextRoute': controller@method
 		- 'returnRoute': index of the resource
 		- 'images': list of all image models
+		- 'showTags': show tag html
+		- 'tags': all tag instances
 -->
 @extends('dashboard.layouts.base')
 @section('content')
@@ -48,6 +50,79 @@
 				</div>
 			@endif
         @endforeach
+		
+		<!--tag section-->
+		@isset($showTags)
+			<label for="tags" class="form-label fs-5">Tags:</label>
+			@empty($disabled)
+				<select name="tags[]" id="tags" multiple class="form-select mb-3" size="6">
+					@foreach ($tags as $tag)
+						<option value="{{ $tag->id }}">{{ $tag->name }}</option>
+					@endforeach
+				</select>
+			@endempty
+			<div id="selected-tags">
+				@foreach ($resource->tags->sortBy('id') as $tag)
+					<span class="badge bg-primary me-1 fs-5" data-value="{{ $tag->id }}">{{ $tag->name }}
+						@empty($disabled)
+							<i class="fas fa-minus-circle ms-1"></i>
+						@endempty
+					</span>
+					<input type="hidden" name="tags[]" value="{{ $tag->id }}">
+				@endforeach
+			</div>
+			
+			<!--makes the tag work-->
+			<script>
+				document.querySelector('#tags').addEventListener('dblclick', event => {
+					if (event.target.tagName === 'OPTION') {
+						let tagId = event.target.value;
+						let tagName = event.target.textContent;
+
+						// Check if tag is already selected
+						let selectedTags = document.querySelectorAll('#selected-tags .badge');
+						let tagAlreadySelected = Array.from(selectedTags).some(tag => tag.getAttribute('data-value') === tagId);
+						if (tagAlreadySelected) {
+							return;
+						}
+
+						// Create badge element
+						let tagElement = document.createElement('span');
+						tagElement.classList.add('badge', 'bg-primary', 'me-1', 'fs-5');
+						tagElement.setAttribute('data-value', tagId);
+						tagElement.innerHTML = `${tagName} ${!{{ json_encode(isset($disabled) ? $disabled : false) }} ? '<i class="fas fa-minus-circle ms-1"></i>' : ''}`;
+						document.querySelector('#selected-tags').appendChild(tagElement);
+
+						// Create hidden input element
+						let inputElement = document.createElement('input');
+						inputElement.type = 'hidden';
+						inputElement.name = 'tags[]';
+						inputElement.value = tagId;
+						document.querySelector('#selected-tags').appendChild(inputElement);
+
+						// Add event listener to remove tag when clicked
+						if (!{{ json_encode(isset($disabled) ? $disabled : false) }}) {
+							tagElement.addEventListener('click', () => {
+								tagElement.remove();
+								inputElement.remove();
+							});
+						}
+					}
+				});
+
+				// Add event listeners to existing badges
+				document.querySelectorAll('#selected-tags .badge').forEach(badge => {
+					badge.addEventListener('click', () => {
+						badge.remove();
+						let inputElement = document.querySelector(`input[name="tags[]"][value="${badge.getAttribute('data-value')}"]`);
+						if (inputElement) {
+							inputElement.remove();
+						}
+					});
+				});
+			</script>
+		@endisset
+		
 		<!--special case for Image models-->
 		@if ($resource->image_id)
 			<div class="d-flex justify-content-center my-3">
