@@ -25,4 +25,5 @@ Route::get('/test', function () {
 Route::group(['prefix' => 'admin', 'as' => 'admin.', /*'middleware' => 'admin'*/ ], function () {
     Route::resource('menus', 'App\Http\Controllers\MenuController');
 	Route::resource('images', 'App\Http\Controllers\ImageController');
+	Route::resource('tags', 'App\Http\Controllers\TagController');
 });

@@ -10,6 +10,16 @@ class Tag extends Model
 {
     use HasFactory;
 	
+	protected $fillable=[
+		"name",
+		"image_id",
+	];
+	
+	public function image()
+	{
+		return $this->belongsTo(Image::class);
+	}
+	
 	public function menus()
     {
         return $this->belongsToMany(Menu::class);
