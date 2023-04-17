@@ -7,6 +7,16 @@ return [
 	'price' => 'Price',
 	'image' => 'Image',
 	'image_id' => 'Image',
+				/*navbar*/
+	'users' => 'Users',
+	'menus' => 'Menus',
+	'tags' => 'Tags',
+	'images' => 'Images',
+	'home' => 'Home',
+	'reservations' => 'Reservations',
+	'events' => 'Events',
+	'dashboard' => 'Dashboard',
+	'resources' => 'Resources',
 				/*etc*/
 	'actions' => 'Actions',
 	'select_prompt' => 'Select...',

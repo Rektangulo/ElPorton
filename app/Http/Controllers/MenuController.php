@@ -7,6 +7,8 @@ use App\Http\Requests\StoreMenuRequest;
 use App\Models\Menu;
 use App\Models\Image;
 use Illuminate\Support\Facades\Storage;
+use App\Services\ImageUploadService;
+use Illuminate\Http\RedirectResponse;
 
 /*
 	TODO refactor headers to the model
@@ -55,13 +57,11 @@ class MenuController extends Controller
 		
 		// Handle file upload
 		if ($request->hasFile('image')) {
-			$movedImage = $request->image->move(public_path('images/public'), $request->image->getClientOriginalName());
 			
-			$image = Image::create([
-				'name' => $request->image->getClientOriginalName(),
-				'image' => 'public/'.$request->image->getClientOriginalName()
-			]);
-			$image->save();
+			$image = ImageUploadService::store($request);
+			if ($image instanceof RedirectResponse) {
+				return $image;
+			}
 			$menu->image()->associate($image);
 			
 		} else if (!empty($request->input('selected-image'))) {
@@ -117,15 +117,12 @@ class MenuController extends Controller
 
 		// Handle file upload
 		if ($request->hasFile('image')) {
-			// Move the uploaded file
-			$movedImage = $request->image->move(public_path('images/public'), $request->image->getClientOriginalName());
 
-			// Create a new image record in the images table
-			$image = Image::create([
-				'name' => $request->image->getClientOriginalName(),
-				'image' => 'public/'.$request->image->getClientOriginalName()
-			]);
-			$image->save();
+			$image = ImageUploadService::store($request);
+			// Check if the result is an error response
+			if ($image instanceof RedirectResponse) {
+				return $image;
+			}
 			// Associate the menu item with the image
 			$menu->image()->associate($image);
 		} else {

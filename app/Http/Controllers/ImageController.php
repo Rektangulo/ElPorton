@@ -8,6 +8,8 @@ use App\Http\Requests\ImageUpdateRequest;
 use App\Models\Image;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
+use App\Services\ImageUploadService;
+use Illuminate\Http\RedirectResponse;
 
 class ImageController extends Controller
 {
@@ -44,22 +46,10 @@ class ImageController extends Controller
      */
     public function store(ImageUploadRequest $request)
     {
-		$data = $request->validated();
-		
-		/*the request validation doesnt work, the images shouldnt be managed like this*/
-		$existingImage = Image::where('image', 'public/'.$request->image->getClientOriginalName())->first();
-
-        if ($existingImage) {
-            return back()->withErrors(['image' => 'An image with this name already exists.']);
-        }
-		
-		$request->image->move(public_path('images/public'), $request->image->getClientOriginalName());
-		$image = Image::create([
-				'name' => $data["name"],
-				'image' => 'public/'.$request->image->getClientOriginalName()
-			]);
-        $image->save();
-
+		$image = ImageUploadService::store($request);
+		if ($image instanceof RedirectResponse) {
+				return $image;
+			}
 		return redirect()->route('admin.images.show', ['image' => $image->id]);
     }
 

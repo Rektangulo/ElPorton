@@ -48,13 +48,13 @@
 				</div>
 			@endif
         @endforeach
-		
 		<!--special case for Image models-->
 		@if ($resource->image_id)
 			<div class="d-flex justify-content-center my-3">
 				<img src="{{ asset('images/' . $resource->image->image) }}" class="img-fluid rounded" alt="Resource image">
 			</div>
-		@else
+		<!--image models use this one-->
+		@elseif ($resource->image)
 			<div class="d-flex justify-content-center my-3">
 				<img src="{{ asset('images/' . $resource->image) }}" class="img-fluid rounded" alt="Resource image">
 			</div>
