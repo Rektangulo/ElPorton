@@ -1,3 +1,9 @@
+<!--
+	receives the following variables:
+		- 'title': page title
+		- 'data' => the resources to show, using all() or similar
+		- 'headers' => array with the table headers without the action buttons,
+-->
 @extends('dashboard.layouts.base')
 @section('content')
 <div style="padding-top: 30px;">
@@ -30,7 +36,7 @@
 						</td>
 					@endforeach
 					<td>
-						<a class="btn btn-warning" href="{{ str_replace('__id__', $row['id'], $editUrl) }}"><i class="fas fa-pencil-alt"></i></a>
+						<a class="btn btn-warning" href="{{ url(request()->path(). '/' . $row['id'] .'/edit') }}"><i class="fas fa-pencil-alt"></i></a>
 						
                         <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal{{ $row['id'] }}"><i class="fas fa-trash"></i></button>
 						
@@ -47,7 +53,7 @@
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ __('headers.cancel') }}</button>
-                                        <form action="{{ str_replace('__id__', $row['id'], $deleteUrl) }}" method="POST">
+                                        <form action="{{ url(request()->path(). '/' . $row['id']) }}" method="POST">
                                             @csrf
                                             @method('DELETE')
 											<button type="submit" class="btn btn-danger">{{ __('headers.delete') }}</button>
@@ -63,7 +69,7 @@
 			<!--add button-->
 			<tr data-href="{{ url(request()->path().'/create') }}">
 				<td colspan="{{count($headers)+1}}" align="center">
-					<a href="{{ $createUrl }}" class="btn btn-success">{{ __('headers.create_new') }}<i class="fas fa-plus-square"></i></a>
+					<a href="{{ url(request()->path().'/create') }}" class="btn btn-success">{{ __('headers.create_new') }}<i class="fas fa-plus-square"></i></a>
 				</td>
 			</tr>
 			

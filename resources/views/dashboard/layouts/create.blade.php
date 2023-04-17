@@ -21,13 +21,16 @@
 					@if ($attribute === 'image_id')
 						<!--Shows the name if its disabled, shows the select or upload if not-->
 						<div class="input-group">
-							<select id="image" name="selected-image" class="form-select fs-5">
-								<option value="">{{ __('headers.select_prompt') }}</option>
-								@foreach ($images as $image)
-									<option value="{{ $image->id }}" {{ $image->id == old('selected-image') ? 'selected' : '' }}>{{ $image->name }}</option>
-								@endforeach
-							</select>
+							<!--if there is no images only the file prompt will be shown-->
+							@isset($images)
+								<select id="image" name="selected-image" class="form-select fs-5">
+									<option value="">{{ __('headers.select_prompt') }}</option>
+									@foreach ($images as $image)
+										<option value="{{ $image->id }}" {{ $image->id == old('selected-image') ? 'selected' : '' }}>{{ $image->name }}</option>
+									@endforeach
+								</select>
 							<label class="input-group-text" for="image-upload">or upload</label>
+							@endisset
 							<input type="file" id="image-upload" name="image" class="form-control">
 						</div>
 					@else

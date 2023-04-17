@@ -21,17 +21,11 @@ class MenuController extends Controller
     {
         $headers = ['name', 'description', 'price', 'image_id'];
 		$menus = Menu::select('id', 'name', 'description', 'price', 'image_id')->paginate(10);
-		$createUrl = route('admin.menus.create');
-		$editUrl = route('admin.menus.edit', ['menu' => '__id__']);
-		$deleteUrl = route('admin.menus.destroy', ['menu' => '__id__']);
 
 
 		return view('dashboard.layouts.index', ['title' => 'Menus',
 												'data' => $menus,
 												'headers' => $headers,
-												'createUrl' => $createUrl,
-												'editUrl' => $editUrl,
-												'deleteUrl' => $deleteUrl,
 											   ]);
     }
 
