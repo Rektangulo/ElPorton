@@ -6,6 +6,7 @@ return [
 	'description' => 'Description',
 	'price' => 'Price',
 	'image' => 'Image',
+	'image_id' => 'Image',
 				/*etc*/
 	'actions' => 'Actions',
 	'select_prompt' => 'Select...',
@@ -20,7 +21,7 @@ return [
 	'cancel' => 'Cancel',
 	'edit' => 'Edit',
 	'return' => 'Return',
-	'create_new' => 'Create new ',
+	'create_new' => 'Create new ', //the space is important
 				/*validation*/
 	'required' => 'The :attribute field is required.',
     'regexPrice' => 'The price must have a maximum of 2 digits after the decimal point, and be no longer than 6 digits.',

@@ -5,6 +5,7 @@
 		- 'resourceType': the name of the resource, to build the action
 		- 'nextRoute': controller@method
 		- 'returnRoute': index of the resource
+		- 'images': list of all image models
 -->
 @extends('dashboard.layouts.base')
 @section('content')
@@ -22,26 +23,22 @@
             @if (!in_array($attribute, ['id', 'created_at', 'updated_at']))
 				<div class="form-group mb-4">
 					<label class="fs-5" for="{{ $attribute }}">{{ __('headers.'.$attribute) }}</label>
-					@if ($attribute === 'image')
-						<!--Shows the path if its disabled, shows the select or upload if not-->
+					@if ($attribute === 'image_id')
+						<!--Shows the name if its disabled, shows the select or upload if not-->
 						@isset($disabled)
-							<input type="text" id="{{ $attribute }}" name="{{ $attribute }}" value="{{ basename($value) }}" class="form-control form-control-lg" @isset($disabled) disabled @endisset>
+							<input type="text" id="{{ $attribute }}" name="{{ $attribute }}" value="{{ $resource->image ? $resource->image->name : '' }}" class="form-control form-control-lg" @isset($disabled) disabled @endisset>
 						@else
-							@php
-							$controller = new App\Http\Controllers\ImageController();
-							$images = $controller->getImages();
-							@endphp
-								<div class="input-group" @isset($disabled) hidden="true" @endisset>
-									<select id="image" name="selected-image" class="form-select fs-5">
-										<option value="">{{ __('headers.select_prompt') }}</option>
-										@foreach ($images as $image)
-											<option value="{{ $image }}" {{ $image == basename($value) ? 'selected' : '' }}>{{ $image }}</option>
-										@endforeach
-									</select>
-									<label class="input-group-text" for="image-upload">or upload</label>
-									<input type="file" id="image-upload" name="image" class="form-control">
-								</div>
-							@endisset
+							<div class="input-group" @isset($disabled) hidden="true" @endisset>
+								<select id="image" name="selected-image" class="form-select fs-5">
+									<option value="">{{ __('headers.select_prompt') }}</option>
+									@foreach ($images as $image)
+										<option value="{{ $image->id }}" {{ $image->id == old('selected-image', $value) ? 'selected' : '' }}>{{ $image->name }}</option>
+									@endforeach
+								</select>
+								<label class="input-group-text" for="image-upload">or upload</label>
+								<input type="file" id="image-upload" name="image" class="form-control">
+							</div>
+						@endisset
 					@else
 						<input type="text" id="{{ $attribute }}" name="{{ $attribute }}" value="{{ $value }}" class="form-control form-control-lg" @isset($disabled) disabled @endisset>
 					@endif
@@ -51,7 +48,7 @@
 				
 		@if ($resource->image)
 			<div class="d-flex justify-content-center my-3">
-				<img src="{{ asset('images/' . $resource->image) }}" class="img-fluid rounded" alt="Resource image">
+				<img src="{{ asset('images/' . $resource->image->image) }}" class="img-fluid rounded" alt="Resource image">
 			</div>
 		@endif
         <div class="d-flex justify-content-center">

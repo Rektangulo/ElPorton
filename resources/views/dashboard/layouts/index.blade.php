@@ -21,7 +21,13 @@
 				<tr data-href="{{ url(request()->path().'/'.$row['id']) }}">
 				<!--<tr>-->
 					@foreach ($headers as $header)
-						<td>{{ $row[$header] }}</td>
+						<td>
+							@if ($header === 'image_id')
+								{{ $row['image'] ? $row['image']->name : '' }}
+							@else
+								{{ $row[$header] }}
+							@endif
+						</td>
 					@endforeach
 					<td>
 						<a class="btn btn-warning" href="{{ str_replace('__id__', $row['id'], $editUrl) }}"><i class="fas fa-pencil-alt"></i></a>
