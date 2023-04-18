@@ -11,12 +11,21 @@ class TagSeeder extends Seeder
     /**
      * Run the database seeds.
      */
-    public function run(): void //todo add images
+	public function run(): void
     {
-        $tags = ['Vegetarian', 'Soy', 'Gluten', 'Milk', 'Eggs', 'Fish', 'Shellfish', 'Nuts', 'Spicy 1', 'Spicy 2', 'Spicy 3'];
+        $tags = [
+            ['name' => 'Crustacean', 'image_id' => '1'],
+            ['name' => 'Eggs', 'image_id' => '2'],
+			['name' => 'Fish', 'image_id' => '3'],
+			['name' => 'Gluten', 'image_id' => '4'],
+			['name' => 'Milk', 'image_id' => '5'],
+			['name' => 'Nuts', 'image_id' => '6'],
+			['name' => 'Sesame', 'image_id' => '7'],
+			['name' => 'Shellfish', 'image_id' => '8'],
+        ];
 
         foreach ($tags as $tag) {
-            Tag::create(['name' => $tag]);
+            Tag::create($tag);
         }
     }
 }
