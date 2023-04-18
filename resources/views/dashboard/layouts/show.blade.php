@@ -4,7 +4,6 @@
 		- 'resource': the resource to show, using Resource::find($id)
 		- 'resourceType': the name of the resource, to build the action
 		- 'nextRoute': controller@method
-		- 'returnRoute': index of the resource
 		- 'images': list of all image models
 		- 'showTags': show tag html
 		- 'tags': all tag instances
@@ -140,7 +139,7 @@
 			@else
 				<a href="{{$resource->id . "/edit"}}" class="btn btn-warning" style="margin-right: 20px;">{{ __('headers.edit') }}</a>
 			@endempty
-            <a href="{{ $returnRoute }}" class="btn btn-secondary">{{ __('headers.return') }}</a>
+            <a href="{{ session('previousUrl', '/default-url') }}" class="btn btn-secondary">{{ __('headers.return') }}</a>
         </div>
     </form>
 </div>

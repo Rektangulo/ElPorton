@@ -20,7 +20,7 @@ class ImageController extends Controller
     {
         $headers = ['name', 'image'];
 		$images = Image::select('id', 'name', 'image')->paginate(10);
-
+		session()->put('previousUrl', request()->fullUrl());
 
 		return view('dashboard.layouts.index', ['title' => 'Images',
 												'data' => $images,
@@ -37,7 +37,6 @@ class ImageController extends Controller
         return view('dashboard.layouts.create', ['attributes' => $attributes,
 												 'resourceType' => 'menu',
 												 'nextRoute' => 'App\Http\Controllers\ImageController@store',
-												 'returnRoute' => '/admin/images',
 											  ]);
     }
 
@@ -62,7 +61,6 @@ class ImageController extends Controller
     	return view('dashboard.layouts.show', ['resource' => $image,
 											   'resourceType' => 'image',
 											   'nextRoute' => 'App\Http\Controllers\ImageController@update', //?
-											   'returnRoute' => '/admin/images',
 											   'disabled' => '1'
 											  ]);
     }
@@ -76,7 +74,6 @@ class ImageController extends Controller
     	return view('dashboard.layouts.show', ['resource' => $image,
 											   'resourceType' => 'image',
 											   'nextRoute' => 'App\Http\Controllers\ImageController@update',
-											   'returnRoute' => '/admin/images',
 											  ]);
     }
 

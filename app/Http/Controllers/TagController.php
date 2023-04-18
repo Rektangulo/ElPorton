@@ -19,7 +19,7 @@ class TagController extends Controller
     {
         $headers = ['name', 'image_id'];
 		$tags = Tag::select('id', 'name', 'image_id')->paginate(10);
-
+		session()->put('previousUrl', request()->fullUrl());
 
 		return view('dashboard.layouts.index', ['title' => 'Tags',
 												'data' => $tags,
@@ -37,7 +37,6 @@ class TagController extends Controller
         return view('dashboard.layouts.create', ['attributes' => $attributes,
 												 'resourceType' => 'tag',
 												 'nextRoute' => 'App\Http\Controllers\TagController@store',
-												 'returnRoute' => '/admin/tags',
 												 'images' => $images,
 											  ]);
     }
@@ -80,7 +79,6 @@ class TagController extends Controller
     	return view('dashboard.layouts.show', ['resource' => $tag,
 											   'resourceType' => 'tag',
 											   'nextRoute' => 'App\Http\Controllers\TagController@update', //?
-											   'returnRoute' => '/admin/tags',
 											   'images' => $images,
 											   'disabled' => '1'
 											  ]);
@@ -95,7 +93,6 @@ class TagController extends Controller
     	return view('dashboard.layouts.show', ['resource' => $tag,
 											   'resourceType' => 'tag',
 											   'nextRoute' => 'App\Http\Controllers\TagController@update',
-											   'returnRoute' => '/admin/tags',
 											   'images' => $images,
 											  ]);
     }

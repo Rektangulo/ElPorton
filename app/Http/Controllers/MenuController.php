@@ -24,7 +24,7 @@ class MenuController extends Controller
     {
         $headers = ['name', 'description', 'price', 'image_id'];
 		$menus = Menu::select('id', 'name', 'description', 'price', 'image_id')->paginate(10);
-
+		session()->put('previousUrl', request()->fullUrl());
 
 		return view('dashboard.layouts.index', ['title' => 'Menus',
 												'data' => $menus,
@@ -43,7 +43,6 @@ class MenuController extends Controller
         return view('dashboard.layouts.create', ['attributes' => $attributes,
 												 'resourceType' => 'menu',
 												 'nextRoute' => 'App\Http\Controllers\MenuController@store',
-												 'returnRoute' => '/admin/menus',
 												 'images' => $images,
 												 'showTags' => '1',
                                                	 'tags' => $tags,
@@ -94,7 +93,6 @@ class MenuController extends Controller
     	return view('dashboard.layouts.show', ['resource' => $menu,
 											   'resourceType' => 'menu',
 											   'nextRoute' => 'App\Http\Controllers\MenuController@update', //?
-											   'returnRoute' => '/admin/menus',
 											   'images' => $images,
 											   'disabled' => '1',
 											   'showTags' => '1',
@@ -112,7 +110,6 @@ class MenuController extends Controller
     	return view('dashboard.layouts.show', ['resource' => $menu,
 											   'resourceType' => 'menu',
 											   'nextRoute' => 'App\Http\Controllers\MenuController@update',
-											   'returnRoute' => '/admin/menus',
 											   'images' => $images,
 											   'showTags' => 1,
 											   'tags' => $tags,

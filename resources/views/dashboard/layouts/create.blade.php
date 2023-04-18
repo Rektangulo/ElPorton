@@ -3,7 +3,6 @@
 		- 'attributes': the fields to show
 		- 'resourceType': the name of the resource, to build the action
 		- 'nextRoute': controller@method
-		- 'returnRoute': index of the resource
 		- 'images': list of all image models
 -->
 @extends('dashboard.layouts.base')
@@ -105,7 +104,7 @@
 		
         <div class="d-flex justify-content-center">
             <button type="submit" class="btn btn-primary" style="margin-right: 20px;">{{ __('headers.save') }}</button>
-            <a href="{{ $returnRoute }}" class="btn btn-secondary">{{ __('headers.return') }}</a>
+            <a href="{{ session('previousUrl', '/default-url') }}" class="btn btn-secondary">{{ __('headers.return') }}</a>
         </div>
     </form>
 </div>
