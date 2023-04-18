@@ -20,10 +20,14 @@
     <form action="{{ action($nextRoute, [$resourceType => $resource->id]) }}" method="POST" enctype="multipart/form-data" class="mb-3">
 		@method('PUT')
         @csrf
+		
+		<!--shows the attributes-->
         @foreach ($resource->getAttributes() as $attribute => $value)
             @if (!in_array($attribute, ['id', 'created_at', 'updated_at', 'image']))
 				<div class="form-group mb-4">
 					<label class="fs-5" for="{{ $attribute }}">{{ __('headers.'.$attribute) }}</label>
+					
+					<!--images-->
 					@if ($attribute === 'image_id')
 						<!--Shows the name if its disabled, shows the select or upload if not-->
 						@isset($disabled)
@@ -38,11 +42,29 @@
 											<option value="{{ $image->id }}" {{ $image->id == old('selected-image', $value) ? 'selected' : '' }}>{{ $image->name }}</option>
 										@endforeach
 									</select>
-									<label class="input-group-text" for="image-upload">or upload</label>
+									<label class="input-group-text" for="image-upload">{{ __('headers.or_upload') }}</label>
 								@endisset
 								<input type="file" id="image-upload" name="image" class="form-control">
 							</div>
 						@endisset
+					
+					<!--description-->
+					@elseif ($attribute === 'description')
+						<textarea id="{{ $attribute }}" name="{{ $attribute }}" rows="5" class="form-control form-control-lg" @isset($disabled) disabled @endisset>{{ old($attribute, $value) }}</textarea>
+					
+					<!--category-->
+					@elseif ($attribute === 'category_id')
+						<select id="{{ $attribute }}" name="{{ $attribute }}" class="form-select form-select-lg" @isset($disabled) disabled @endisset>
+							@if(isset($disabled) && $resource->category_id === null)
+								<option value="">{{ __('headers.none') }}</option>
+							@endif
+							<option value="">{{ __('headers.select_prompt') }}</option>
+							@foreach (\App\Models\Category::all() as $category)
+								<option value="{{ $category->id }}" {{ $category->id == old($attribute, $value) ? 'selected' : '' }}>{{ $category->name }}</option>
+							@endforeach
+						</select>
+					
+					<!--default text-->
 					@else
 						<input type="text" id="{{ $attribute }}" name="{{ $attribute }}" value="{{ $value }}" class="form-control form-control-lg" @isset($disabled) disabled @endisset>
 					@endif
@@ -52,7 +74,7 @@
 		
 		<!--tag section-->
 		@isset($showTags)
-			<label for="tags" class="form-label fs-5">Tags:</label>
+			<label for="tags" class="form-label fs-5">{{ __('headers.tags:') }}</label>
 			@empty($disabled)
 				<select name="tags[]" id="tags" multiple class="form-select mb-3" size="6">
 					@foreach ($tags as $tag)
@@ -70,56 +92,6 @@
 					<input type="hidden" name="tags[]" value="{{ $tag->id }}">
 				@endforeach
 			</div>
-			
-			<!--makes the tag work-->
-			<script>
-				document.querySelector('#tags').addEventListener('dblclick', event => {
-					if (event.target.tagName === 'OPTION') {
-						let tagId = event.target.value;
-						let tagName = event.target.textContent;
-
-						// Check if tag is already selected
-						let selectedTags = document.querySelectorAll('#selected-tags .badge');
-						let tagAlreadySelected = Array.from(selectedTags).some(tag => tag.getAttribute('data-value') === tagId);
-						if (tagAlreadySelected) {
-							return;
-						}
-
-						// Create badge element
-						let tagElement = document.createElement('span');
-						tagElement.classList.add('badge', 'bg-primary', 'me-1', 'fs-5');
-						tagElement.setAttribute('data-value', tagId);
-						tagElement.innerHTML = `${tagName} ${!{{ json_encode(isset($disabled) ? $disabled : false) }} ? '<i class="fas fa-minus-circle ms-1"></i>' : ''}`;
-						document.querySelector('#selected-tags').appendChild(tagElement);
-
-						// Create hidden input element
-						let inputElement = document.createElement('input');
-						inputElement.type = 'hidden';
-						inputElement.name = 'tags[]';
-						inputElement.value = tagId;
-						document.querySelector('#selected-tags').appendChild(inputElement);
-
-						// Add event listener to remove tag when clicked
-						if (!{{ json_encode(isset($disabled) ? $disabled : false) }}) {
-							tagElement.addEventListener('click', () => {
-								tagElement.remove();
-								inputElement.remove();
-							});
-						}
-					}
-				});
-
-				// Add event listeners to existing badges
-				document.querySelectorAll('#selected-tags .badge').forEach(badge => {
-					badge.addEventListener('click', () => {
-						badge.remove();
-						let inputElement = document.querySelector(`input[name="tags[]"][value="${badge.getAttribute('data-value')}"]`);
-						if (inputElement) {
-							inputElement.remove();
-						}
-					});
-				});
-			</script>
 		@endisset
 		
 		<!--special case for Image models-->
@@ -152,4 +124,54 @@
         </ul>
     </div>
 @endif
+
+<!--makes the tag work-->
+<script>
+	document.querySelector('#tags').addEventListener('dblclick', event => {
+		if (event.target.tagName === 'OPTION') {
+			let tagId = event.target.value;
+			let tagName = event.target.textContent;
+
+			// Check if tag is already selected
+			let selectedTags = document.querySelectorAll('#selected-tags .badge');
+			let tagAlreadySelected = Array.from(selectedTags).some(tag => tag.getAttribute('data-value') === tagId);
+			if (tagAlreadySelected) {
+				return;
+			}
+
+			// Create badge element
+			let tagElement = document.createElement('span');
+			tagElement.classList.add('badge', 'bg-primary', 'me-1', 'fs-5');
+			tagElement.setAttribute('data-value', tagId);
+			tagElement.innerHTML = `${tagName} ${!{{ json_encode(isset($disabled) ? $disabled : false) }} ? '<i class="fas fa-minus-circle ms-1"></i>' : ''}`;
+			document.querySelector('#selected-tags').appendChild(tagElement);
+
+			// Create hidden input element
+			let inputElement = document.createElement('input');
+			inputElement.type = 'hidden';
+			inputElement.name = 'tags[]';
+			inputElement.value = tagId;
+			document.querySelector('#selected-tags').appendChild(inputElement);
+
+			// Add event listener to remove tag when clicked
+			if (!{{ json_encode(isset($disabled) ? $disabled : false) }}) {
+				tagElement.addEventListener('click', () => {
+					tagElement.remove();
+					inputElement.remove();
+				});
+			}
+		}
+	});
+
+	// Add event listeners to existing badges
+	document.querySelectorAll('#selected-tags .badge').forEach(badge => {
+		badge.addEventListener('click', () => {
+			badge.remove();
+			let inputElement = document.querySelector(`input[name="tags[]"][value="${badge.getAttribute('data-value')}"]`);
+			if (inputElement) {
+				inputElement.remove();
+			}
+		});
+	});
+</script>
 @stop

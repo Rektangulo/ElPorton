@@ -16,6 +16,7 @@ class DatabaseSeeder extends Seeder
             RoleSeeder::class,
 			ImageSeeder::class,
 			TagSeeder::class,
+			CategorySeeder::class,
 			MenuSeeder::class,
         ]);
         // \App\Models\User::factory(10)->create();

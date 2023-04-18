@@ -21,6 +21,7 @@ class MenuFactory extends Factory
             'description' => $this->faker->sentence,
             'price' => $this->faker->randomFloat(2, 5, 20),
             'image_id' => $this->faker->numberBetween(9, 20),
+			'category_id' => $this->faker->numberBetween(1, 7),
         ];
     }
 }

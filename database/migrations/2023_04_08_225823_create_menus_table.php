@@ -16,8 +16,12 @@ return new class extends Migration
 			$table->string('name');
 			$table->string('description')->nullable();
 			$table->decimal('price', 8, 2);
-			$table->unsignedBigInteger('image_id')->nullable()->foreign('image_id')->references('id')->on('images');
+			$table->unsignedBigInteger('image_id')->nullable();
+			$table->unsignedBigInteger('category_id')->nullable();
             $table->timestamps();
+			
+			$table->foreign('image_id')->references('id')->on('images')->onDelete('set null');
+    		$table->foreign('category_id')->references('id')->on('categories')->onDelete('set null');
         });
     }
 

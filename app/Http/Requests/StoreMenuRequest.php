@@ -24,7 +24,8 @@ class StoreMenuRequest extends FormRequest
         return [
             'name' => 'required|string',
             'description' => 'required|string',
-            'price' => 'required|numeric|regex:/^\d{1,6}(\.\d{1,2})?$/'
+            'price' => 'required|numeric|regex:/^\d{1,6}(\.\d{1,2})?$/',
+			'category_id' => 'exists:categories,id',
         ];
     }
 	

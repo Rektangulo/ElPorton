@@ -18,6 +18,7 @@
 				<li><a class="dropdown-item" href="/admin/menus">{{ __('headers.menus') }}</a></li>
 				<li><a class="dropdown-item" href="/admin/images">{{ __('headers.images') }}</a></li>
 				<li><a class="dropdown-item" href="/admin/tags">{{ __('headers.tags') }}</a></li>
+				  <li><a class="dropdown-item" href="/admin/categories">{{ __('headers.categories') }}</a></li>
 			  </ul>
 			</li>
 			<li class="nav-item">

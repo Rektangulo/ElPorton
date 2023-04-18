@@ -16,6 +16,7 @@ class Menu extends Model
 		"description",
 		"price",
 		"image_id",
+		"category_id",
 	];
 	
 	public function image()
@@ -27,4 +28,9 @@ class Menu extends Model
     {
         return $this->belongsToMany(Tag::class);
     }
+	
+	public function category()
+	{
+		return $this->belongsTo(Category::class);
+	}
 }

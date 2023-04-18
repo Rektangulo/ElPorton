@@ -39,7 +39,7 @@ class MenuController extends Controller
     {
 		$images = Image::all();
 		$tags = Tag::all();
-		$attributes = ['name', 'description', 'price', 'image_id'];
+		$attributes = ['name', 'description', 'price', 'image_id', 'category_id'];
         return view('dashboard.layouts.create', ['attributes' => $attributes,
 												 'resourceType' => 'menu',
 												 'nextRoute' => 'App\Http\Controllers\MenuController@store',

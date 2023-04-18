@@ -26,4 +26,5 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', /*'middleware' => 'admin'*/
     Route::resource('menus', 'App\Http\Controllers\MenuController');
 	Route::resource('images', 'App\Http\Controllers\ImageController');
 	Route::resource('tags', 'App\Http\Controllers\TagController');
+	Route::resource('categories', 'App\Http\Controllers\CategoryController');
 });
