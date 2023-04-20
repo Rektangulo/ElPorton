@@ -1,45 +1,18 @@
 @extends('layout')
-<body class="bg-darker text-light"></body>
 @section('content')
 <style>
-@font-face {
-  font-family: "fournier";
-  src: url("fonts/FournierMTStdRegular.woff") format('woff');
-}
-@font-face {
-  font-family: "kentledge";
-  src: url("fonts/kentledge-heavy.otf") format('otf');
-}
-.text-white p {
-    font-family: 'fournier', sans-serif;
-}
-	
-.bg-darker {
-  background-image: linear-gradient(to bottom, #191919, #171717)!important;
-}
 
-.carousel-item {
-  max-height: 900px;
-}
+	.carousel-shadow {
 
-.separator {
-	font-family: 'kentledge', serif;
-}
-
-.carousel-shadow {
-	
-  background-image: linear-gradient(to top, rgba(0, 0, 0, 0.95), transparent);
-}
-
+	  background-image: linear-gradient(to top, rgba(0, 0, 0, 0.95), transparent);
+	}
+	.carousel-item {
+	  max-height: 900px;
+	}
 </style>
 <!--first image with quote-->
-<div class="position-relative">
-    <img src="http://homestead.test/images/landing/background.jpg" alt="" class="img-fluid w-100" style="height: 700px; object-fit: cover;">
-    <div class="position-absolute w-100 h-100" style="top: 0; background-color: rgba(0, 0, 0, 0.5);"></div>
-    <div class="position-absolute w-100 h-100 d-flex align-items-center justify-content-center text-white" style="top: 0;">
-        <p class="text-center mx-auto" style="max-width: 60%; font-size: 34px;">Visit our cozy restaurant nestled in the heart of town next to the historic church. Indulge in our unique fusion of Spanish and Chinese cuisine, expertly crafted from the freshest ingredients. Relax with a drink at our bar and enjoy the warm and welcoming atmosphere. We look forward to serving you.</p>
-    </div>
-</div>
+<x-shadowed-image image="{{ asset('/images/landing/background.jpg') }}" text="Visit our cozy restaurant nestled in the heart of town next to the historic church. Indulge in our unique fusion of Spanish and Chinese cuisine, expertly crafted from the freshest ingredients. Relax with a drink at our bar and enjoy the warm and welcoming atmosphere. We look forward to serving you." />
+
 
 <!--images with text in 2x2 grid-->
 <div class="container-fluid my-5">
@@ -48,11 +21,11 @@
       <img src="{{asset('images/landing/party.jpeg')}}" style="max-width: 80%;" class="img-fluid my-3 smaller-image mx-auto rounded closer-to-center" alt="Image">
     </div>
     <div class="col-md-6 text-center d-flex align-items-center">
-      <div class="card bg-darker text-light w-100 less-wide border border-light mx-auto" style="max-width: 60%;">
+      <div class="card bg-darker text-light w-100 less-wide border border-light rounded-0 mx-auto" style="max-width: 60%;">
         <div class="card-body">
           <h2 class="card-title">Host A Party</h2>
           <p class="card-text mt-3 lead">We recommend celebrating all moments, big or small. Here, you don't need an excuse to gather.</p>
-          <button type="button" class="btn btn-light">Learn More</button>
+          <a href="/reservation" class="btn btn-light">Reserve</a>
         </div>
       </div>
     </div>
@@ -62,11 +35,11 @@
       <img src="{{asset('images/landing/menu.jpg')}}" style="max-width: 80%;" class="img-fluid my-3 smaller-image mx-auto rounded closer-to-center" alt="Image">
     </div>
     <div class="col-md-6 text-center d-flex align-items-center order-md-1">
-      <div class="card bg-darker text-light w-100 less-wide border border-light mx-auto" style="max-width: 60%;">
+      <div class="card bg-darker text-light w-100 less-wide border border-light rounded-0 mx-auto" style="max-width: 60%;">
         <div class="card-body">
           <h2 class="card-title">Menus</h2>
           <p class="card-text mt-3 lead">Come see the items featured from our scratch made kitchen.</p>
-          <button type="button" class="btn btn-light">View Menu</button>
+          <a href="/menu" class="btn btn-light">View Menu</a>
         </div>
       </div>
     </div>
