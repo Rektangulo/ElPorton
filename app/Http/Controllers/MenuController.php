@@ -20,17 +20,18 @@ class MenuController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
-    {
-        $headers = ['name', 'description', 'price', 'image_id'];
-		$menus = Menu::select('id', 'name', 'description', 'price', 'image_id')->paginate(10);
+	public function index(Request $request)
+	{
+		$headers = ['name', 'description', 'price', 'image_id'];
+		$search = $request->input('search');
+		$menus = Menu::select('id', 'name', 'description', 'price', 'image_id')->where('name', 'like', '%' . $search . '%')->paginate(10);
 		session()->put('previousUrl', request()->fullUrl());
 
 		return view('dashboard.layouts.index', ['title' => 'Menus',
 												'data' => $menus,
 												'headers' => $headers,
 											   ]);
-    }
+	}
 
     /**
      * Show the form for creating a new resource.

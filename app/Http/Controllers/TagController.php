@@ -15,10 +15,11 @@ class TagController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         $headers = ['name', 'image_id'];
-		$tags = Tag::select('id', 'name', 'image_id')->paginate(10);
+		$search = $request->input('search');
+		$tags = Tag::select('id', 'name', 'image_id')->where('name', 'like', '%' . $search . '%')->paginate(10);
 		session()->put('previousUrl', request()->fullUrl());
 
 		return view('dashboard.layouts.index', ['title' => 'Tags',

@@ -16,10 +16,11 @@ class ImageController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         $headers = ['name', 'image'];
-		$images = Image::select('id', 'name', 'image')->paginate(10);
+		$search = $request->input('search');
+		$images = Image::select('id', 'name', 'image')->where('name', 'like', '%' . $search . '%')->paginate(10);
 		session()->put('previousUrl', request()->fullUrl());
 
 		return view('dashboard.layouts.index', ['title' => 'Images',

@@ -16,6 +16,15 @@
 	<table class="table table-dark table-hover table-striped text-center fs-5" style="width: 90%; margin: auto;">
 		<thead>
 			<tr>
+                <th colspan="{{ count($headers) + 1 }}">
+                    <form method="GET" action="{{ url(request()->path()) }}" class="d-flex justify-content-end">
+                        <input type="text" name="search" placeholder="Search..." class="form-control me-2">
+                        <button type="submit" class="btn btn-outline-success me-2">Search</button>
+                        <a href="{{ url(request()->path()) }}" class="btn btn-outline-danger">Reset</a>
+                    </form>
+                </th>
+            </tr>
+			<tr>
 				@foreach ($headers as $header)
 					<th>{{ __('headers.'.$header) }}</th>
 				@endforeach
@@ -25,7 +34,6 @@
 		<tbody class="table-group-divider">
 			@foreach ($data as $row)
 				<tr data-href="{{ url(request()->path().'/'.$row['id']) }}">
-				<!--<tr>-->
 					@foreach ($headers as $header)
 						<td>
 							@if ($header === 'image_id')
@@ -66,6 +74,7 @@
 					</td>
 				</tr>
 			@endforeach
+			
 			<!--add button-->
 			<tr data-href="{{ url(request()->path().'/create') }}">
 				<td colspan="{{count($headers)+1}}" align="center">
