@@ -1,3 +1,4 @@
+<!--layout blade for every landing page, with fonts, navbar and footer-->
 @extends('bootstrap')
 <body class="bg-darker text-light"></body>
 <style>
@@ -39,12 +40,12 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <div class="navbar-nav ms-auto" style="margin-right: 5%;">
-                <a class="nav-link mx-1" href="/reservation">Reservations</a>
-                <a class="nav-link mx-1" href="/menu">Menu</a>
-                <a class="nav-link mx-1" href="/events">Events</a>
-                <a class="nav-link mx-1" href="/contact">Contact</a>
-                <a class="nav-link mx-1" href="/login">Login</a>
-                <a class="nav-link mx-1" href="/register">Register</a>
+                <a class="nav-link mx-1" href="/reservation">{{ __('front.reservation') }}</a>
+				<a class="nav-link mx-1" href="/menu">{{ __('front.menu') }}</a>
+				<a class="nav-link mx-1" href="/events">{{ __('front.events') }}</a>
+				<a class="nav-link mx-1" href="/contact">{{ __('front.contact') }}</a>
+				<a class="nav-link mx-1" href="/login">{{ __('front.login') }}</a>
+				<a class="nav-link mx-1" href="/register">{{ __('front.register') }}</a>
             </div>
         </div>
     </div>
@@ -54,78 +55,78 @@
 @yield('content')
 
 <footer class="footer mt-auto py-5 bg-dark bg-gradient text-warning">
-  <div class="container">
-    <div class="row align-items-center justify-content-center">
-      <div class="col-auto mb-3 mb-md-0">
-        <a href="/" class="no-animation"><img src="{{ asset('images/logo.png') }}" alt="Logo" width="220" class="img-fluid mb-5"></a>
-      </div>
-      <div class="col-12 col-md-auto">
-        <div class="row text-center gx-5">
-          <div class="col-12 col-md min-width">
-            <h4>Information</h4>
-            <hr>
-            <ul class="list-unstyled larger-text">
-              <li><a href="/register">Register</a></li>
-              <li><a href="/login">Login</a></li>
-              <li><a href="/reservation">Make reservation</a></li>
-              <li><a href="/terms">Terms of service</a></li>
-              <li><a href="/cookie-consent">Cookie consent</a></li>
-            </ul>
-          </div>
-          <div class="col-12 col-md min-width">
-            <h4>About Us</h4>
-            <hr>
-            <ul class="list-unstyled larger-text">
-              <li>Monday to Saturday: 8:00 - 24:00</li>
-              <li><a href="/faq">FAQ</a></li>
-              <li><a href="/newsletter">Newsletter</a></li>
-              <li><a href="/our-story">Our Story</a></li>
-            </ul>
-          </div>
-          <div class="col-12 col-md min-width">
-            <h4>Contact</h4>
-            <hr>
-            <ul class="list-unstyled larger-text">
-              <li><i class="fas fa-phone"></i> 123-456-7890</li>
-              <li><i class="fas fa-envelope"></i> <a href="mailto:example@example.com">example@example.com</a></li>
-              <li><i class="fas fa-map-marker"></i> 123 Example St.</li>
-            </ul>
-            <a href="https://www.facebook.com/" class="no-animation"><i class="fab fa-facebook fa-2x yellow-icon"></i></a>
-			<a href="https://twitter.com/" class="no-animation"><i class="fab fa-twitter fa-2x yellow-icon"></i></a>
-			<a href="https://www.instagram.com/" class="no-animation"><i class="fab fa-instagram fa-2x yellow-icon"></i></a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+	<div class="container">
+		<div class="row align-items-center justify-content-center">
+			<div class="col-auto mb-3 mb-md-0">
+				<a href="/" class="no-animation"><img src="{{ asset('images/logo.png') }}" alt="Logo" width="220" class="img-fluid mb-5"></a>
+			</div>
+			<div class="col-12 col-md-auto">
+				<div class="row text-center gx-5">
+					<div class="col-12 col-md min-width">
+						<h4>{{ __('front.information') }}</h4>
+						<hr>
+						<ul class="list-unstyled larger-text">
+							<li><a href="/register">{{ __('front.register') }}</a></li>
+							<li><a href="/login">{{ __('front.login') }}</a></li>
+							<li><a href="/reservation">{{ __('front.make_reservation') }}</a></li>
+							<li><a href="/terms">{{ __('front.terms_of_service') }}</a></li>
+							<li><a href="/cookie-consent">{{ __('front.cookie_consent') }}</a></li>
+						</ul>
+					</div>
+					<div class="col-12 col-md min-width">
+						<h4>{{ __('front.about_us') }}</h4>
+						<hr>
+						<ul class="list-unstyled larger-text">
+							<li>{{ __('front.hours') }}</li>
+							<li><a href="/contact#faq-section">{{ __('front.faq') }}</a></li>
+							<li><a href="/newsletter">{{ __('front.newsletter') }}</a></li>
+							<li><a href="/contact">{{ __('front.contact') }}</a></li>
+						</ul>
+					</div>
+					<div class="col-12 col-md min-width">
+						<h4>{{ __('front.contact') }}</h4>
+						<hr>
+						<ul class="list-unstyled larger-text">
+							<li><i class="fas fa-phone"></i> {{ __('front.phone') }}</li>
+							<li><i class="fas fa-envelope"></i> <a href="mailto:example@example.com">{{ __('front.email') }}</a></li>
+							<li><a href="/contact#map"><i class="fas fa-map-marker"></i> {{ __('front.street') }}</a></li>
+						</ul>
+						<a href="https://www.facebook.com/" class="no-animation"><i class="fab fa-facebook fa-2x yellow-icon"></i></a>
+						<a href="https://twitter.com/" class="no-animation"><i class="fab fa-twitter fa-2x yellow-icon"></i></a>
+						<a href="https://www.instagram.com/" class="no-animation"><i class="fab fa-instagram fa-2x yellow-icon"></i></a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 	<!--footer styles-->
-<style>
-	.min-width {
-	  min-width: 350px;
-	}
+	<style>
+		.min-width {
+		  min-width: 350px;
+		}
 
-	.larger-text {
-	  font-size: 1.2em;
-	}
+		.larger-text {
+		  font-size: 1.2em;
+		}
 
-	.yellow-icon {
-	  color: #FFD700;
-	}
-	.footer a {
-		color: inherit;
-		text-decoration: none;
-		position: relative;
-	}
+		.yellow-icon {
+		  color: #FFD700;
+		}
+		.footer a {
+			color: inherit;
+			text-decoration: none;
+			position: relative;
+		}
 
-	.footer a:not(.no-animation):hover::after {
-		content: "";
-		position: absolute;
-		bottom: 0;
-		left: 0;
-		right: 0;
-		height: 2px;
-		background-color: currentColor;
-	}
-</style>
+		.footer a:not(.no-animation):hover::after {
+			content: "";
+			position: absolute;
+			bottom: 0;
+			left: 0;
+			right: 0;
+			height: 2px;
+			background-color: currentColor;
+		}
+	</style>
 </footer>
 @stop

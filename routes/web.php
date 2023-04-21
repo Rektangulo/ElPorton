@@ -16,7 +16,7 @@ use App\Http\Controllers\FrontController;
 
 Route::get('/', [FrontController::class, 'landing']);
 Route::get('/menu', [FrontController::class, 'menu']);
-
+Route::get('/contact', [FrontController::class, 'contact']);
 
 Route::get('/test', function () {
     //return view('dashboard.test');

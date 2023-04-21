@@ -19,8 +19,8 @@
                 <th colspan="{{ count($headers) + 1 }}">
                     <form method="GET" action="{{ url(request()->path()) }}" class="d-flex justify-content-end">
                         <input type="text" name="search" placeholder="Search..." class="form-control me-2">
-                        <button type="submit" class="btn btn-outline-success me-2">Search</button>
-                        <a href="{{ url(request()->path()) }}" class="btn btn-outline-danger">Reset</a>
+                        <button type="submit" class="btn btn-outline-success me-2">{{ __('headers.search') }}</button>
+                        <a href="{{ url(request()->path()) }}" class="btn btn-outline-danger">{{ __('headers.reset') }}</a>
                     </form>
                 </th>
             </tr>

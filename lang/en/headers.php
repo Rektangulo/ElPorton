@@ -2,6 +2,8 @@
 
 return [
 				/*menus*/
+	'search' => 'Search',
+	'reset' => 'Reset',
     'name' => 'Name',
 	'description' => 'Description',
 	'price' => 'Price',

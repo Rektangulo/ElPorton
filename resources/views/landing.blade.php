@@ -11,7 +11,7 @@
 	}
 </style>
 <!--first image with quote-->
-<x-shadowed-image image="{{ asset('/images/landing/background.jpg') }}" text="Visit our cozy restaurant nestled in the heart of town next to the historic church. Indulge in our unique fusion of Spanish and Chinese cuisine, expertly crafted from the freshest ingredients. Relax with a drink at our bar and enjoy the warm and welcoming atmosphere. We look forward to serving you." />
+<x-shadowed-image image="{{ asset('/images/landing/background.jpg') }}" text="{{ __('front.landing_description') }}" />
 
 
 <!--images with text in 2x2 grid-->
@@ -23,9 +23,9 @@
     <div class="col-md-6 text-center d-flex align-items-center">
       <div class="card bg-darker text-light w-100 less-wide border border-light rounded-0 mx-auto" style="max-width: 60%;">
         <div class="card-body">
-          <h2 class="card-title">Host A Party</h2>
-          <p class="card-text mt-3 lead">We recommend celebrating all moments, big or small. Here, you don't need an excuse to gather.</p>
-          <a href="/reservation" class="btn btn-light">Reserve</a>
+          <h2 class="card-title">{{ __('front.host_card') }}</h2>
+          <p class="card-text mt-3 lead">{{ __('front.host_card_text') }}</p>
+          <a href="/reservation" class="btn btn-light">{{ __('front.host_card_button') }}</a>
         </div>
       </div>
     </div>
@@ -37,9 +37,9 @@
     <div class="col-md-6 text-center d-flex align-items-center order-md-1">
       <div class="card bg-darker text-light w-100 less-wide border border-light rounded-0 mx-auto" style="max-width: 60%;">
         <div class="card-body">
-          <h2 class="card-title">Menus</h2>
-          <p class="card-text mt-3 lead">Come see the items featured from our scratch made kitchen.</p>
-          <a href="/menu" class="btn btn-light">View Menu</a>
+          <h2 class="card-title">{{ __('front.menu_card') }}</h2>
+          <p class="card-text mt-3 lead">{{ __('front.menu_card_text') }}</p>
+          <a href="/menu" class="btn btn-light">{{ __('front.menu_card_button') }}</a>
         </div>
       </div>
     </div>
@@ -48,7 +48,7 @@
 
 <!-- Separator -->
 <div class="separator text-center fs-1 m-5">
-  <p>"GOOD FOOD IS THE FOUNDATION OF GENUINE HAPPINESS"</p>
+  <p>{{ __('front.quote') }}</p>
 </div>
 
 <!--carousel-->
@@ -63,34 +63,34 @@
     <img src="{{ asset('images/landing/carousel/carousel1.jpg')}}" class="d-block w-100 img-fluid" alt="carousel1">
 	<div class="carousel-shadow position-absolute bottom-0 start-0 end-0 h-50"></div>
     <div class="carousel-caption d-none d-md-block fs-4">
-      <h5>A feast for the senses</h5>
-      <p>Our dishes are expertly crafted to delight your taste buds, while our charming ambiance will transport you to another world. Come dine with us and experience the magic for yourself.</p>
+      <h5>{{ __('front.carousel1_title') }}</h5>
+      <p>{{ __('front.carousel1_text') }}</p>
     </div>
   </div>
   <div class="carousel-item">
     <img src="{{ asset('images/landing/carousel/carousel2.jpg')}}" class="d-block w-100 img-fluid" alt="carousel2">
 	<div class="carousel-shadow position-absolute bottom-0 start-0 end-0 h-50"></div>
     <div class="carousel-caption d-none d-md-block fs-4">
-      <h5>Good food, good company</h5>
-      <p>There’s nothing quite like sharing a meal with good company. At our restaurant we offer a warm and welcoming atmosphere where you can enjoy delicious food and great conversation. Join us for a meal that will leave you feeling satisfied and happy.</p>
+      <h5>{{ __('front.carousel2_title') }}</h5>
+      <p>{{ __('front.carousel2_text') }}</p>
     </div>
   </div>
   <div class="carousel-item">
     <img src="{{ asset('images/landing/carousel/carousel3.jpg')}}" class="d-block w-100 img-fluid" alt="carousel3">
 	<div class="carousel-shadow position-absolute bottom-0 start-0 end-0 h-50"></div>
     <div class="carousel-caption d-none d-md-block fs-4">
-      <h5>Indulge in culinary delights</h5>
-      <p>Treat yourself to a meal that will tantalize your taste buds. Our restaurant offers a diverse selection of dishes that are expertly prepared to delight your senses. From bold flavors to subtle nuances, our menu has something for everyone. Join us for a dining experience that will leave you feeling satisfied and fulfilled.</p>
+      <h5>{{ __('front.carousel3_title') }}</h5>
+      <p>{{ __('front.carousel3_text') }}</p>
     </div>
   </div>
 </div>
   <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Previous</span>
+    <span class="visually-hidden">{{ __('front.previous') }}</span>
   </button>
   <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
     <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Next</span>
+    <span class="visually-hidden">{{ __('front.next') }}</span>
   </button>
 </div>
 

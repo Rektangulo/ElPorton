@@ -22,4 +22,9 @@ class FrontController extends Controller
 							 'recommendedMenus' => $recommendedMenus,
 							]);
     }
+	
+	public function contact()
+	{
+		return view('contact');
+	}
 }

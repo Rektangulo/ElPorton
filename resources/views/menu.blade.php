@@ -12,7 +12,7 @@
 <div class="container" style="max-width: 80%;">
 	
 	<!-- Separator -->
-	<x-separator image="/images/decorations/flourish2.png" text="Our recommendations"/>
+	<x-separator image="/images/decorations/flourish2.png" text="{{ __('front.title_recommendation') }}"/>
 
     <!-- Recommended Menus -->
     <div id="recommendedMenusCarousel" class="carousel slide my-4" data-bs-ride="carousel">
@@ -60,16 +60,16 @@
         </div>
         <button class="carousel-control-prev" type="button" data-bs-target="#recommendedMenusCarousel" data-bs-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
+            <span class="visually-hidden">{{ __('front.previous') }}</span>
         </button>
         <button class="carousel-control-next" type="button" data-bs-target="#recommendedMenusCarousel" data-bs-slide="next">
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
+            <span class="visually-hidden">{{ __('front.next') }}</span>
         </button>
     </div>
 	
 	<!-- Separator -->
-	<x-separator image="/images/decorations/flourish1.png" text="Our dishes" />
+	<x-separator image="/images/decorations/flourish1.png" text="{{ __('front.title_menu') }}" />
 	
     <!-- Category Tabs -->
 	<ul class="nav nav-tabs my-4 d-flex justify-content-center" role="tablist">
@@ -131,6 +131,6 @@
 	</div>
 
 </div>
-<x-shadowed-image image="{{ asset('/images/menu/background.jpg') }}" text="Join us for dinner" height="450px" font-size="60px" shadow-opacity="0.6" />
+<x-shadowed-image image="{{ asset('/images/menu/background.jpg') }}" text="{{ __('front.title_join') }}" height="450px" font-size="60px" shadow-opacity="0.6" />
 
 @stop
