@@ -1,8 +1,8 @@
 <?php
 
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FrontController;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,18 +14,29 @@ use App\Http\Controllers\FrontController;
 |
 */
 
+/*Route::get('/', function () {
+    return view('welcome');
+});*/
+
 Route::get('/', [FrontController::class, 'landing']);
 Route::get('/menu', [FrontController::class, 'menu']);
 Route::get('/contact', [FrontController::class, 'contact']);
 
-Route::get('/test', function () {
-    //return view('dashboard.test');
-	return view('test');
-});
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::group(['prefix' => 'admin', 'as' => 'admin.', /*'middleware' => 'admin'*/ ], function () {
     Route::resource('menus', 'App\Http\Controllers\MenuController');
-	Route::resource('images', 'App\Http\Controllers\ImageController');
-	Route::resource('tags', 'App\Http\Controllers\TagController');
-	Route::resource('categories', 'App\Http\Controllers\CategoryController');
+    Route::resource('images', 'App\Http\Controllers\ImageController');
+    Route::resource('tags', 'App\Http\Controllers\TagController');
+    Route::resource('categories', 'App\Http\Controllers\CategoryController');
 });
+
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+require __DIR__.'/auth.php';
