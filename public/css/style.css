@@ -1,0 +1,39 @@
+@font-face {
+  font-family: "fournier";
+  src: url("../fonts/FournierMTStdRegular.woff") format('woff');
+}
+@font-face {
+  font-family: "kentledge";
+  src: url("../fonts/kentledge-heavy.otf") format('otf');
+}
+@font-face {
+  font-family: "cormorant";
+  src: url("../fonts/CormorantGaramond-BoldItalic.ttf") format('truetype');
+}
+@font-face {
+  font-family: "raleway";
+  src: url("../fonts/Raleway-VariableFont_wght.ttf") format('truetype');
+}
+.separator {
+	font-family: 'cormorant', serif;
+}
+.shadowed-image {
+	font-family: 'fournier', sans-serif;
+}
+input {
+	border: 2px solid;
+	border-image-slice: 1;
+	border-image-source: linear-gradient(to right, #8e642b, #f6f6a3, #8e642b);
+	background-color: #343a40 !important;
+	color: white;
+}
+.logo-sm {
+	height: 170px;
+}
+.bg-darker {
+	background-color: #171717 !important;
+	font-family: 'raleway', sans-serif;
+}
+.bg-dark {
+	background-color: #212529;
+}

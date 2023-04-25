@@ -23,6 +23,11 @@ class User extends Authenticatable
         'password',
     ];
 	
+	public function isAdmin()
+	{
+		return $this->role_id == 1;
+	}
+	
 	public function role()
     {
         return $this->belongsTo('App\Models\Role');

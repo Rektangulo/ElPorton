@@ -1,9 +1,10 @@
+<!--base blade for the admin dashboard, with the navbar-->
 @extends('bootstrap')
 @section('page')
 <body class="bg-dark text-white">
 	<nav class="navbar navbar-expand-lg navbar-dark fs-4" style="background-color: #400b96;">
 	  <div class="container-fluid">
-		<a class="navbar-brand fs-3" href="#">{{ __('headers.dashboard') }}</a>
+		<a class="navbar-brand fs-3" href="/admin">{{ __('headers.dashboard') }}</a>
 		<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDarkDropdown" aria-controls="navbarNavDarkDropdown" aria-expanded="false" aria-label="Toggle navigation">
 		  <span class="navbar-toggler-icon"></span>
 		</button>
@@ -25,10 +26,10 @@
 			  <a class="nav-link me-2" href="/">{{ __('headers.home') }}</a>
 			</li>
 			<li class="nav-item">
-			  <a class="nav-link me-2" href="#">{{ __('headers.reservations') }}</a>
+			  <a class="nav-link me-2" href="/admin/reservations">{{ __('headers.reservations') }}</a>
 			</li>
 			<li class="nav-item">
-			  <a class="nav-link me-2" href="#">{{ __('headers.events') }}</a>
+			  <a class="nav-link me-2" href="/admin/messages">{{ __('headers.messages') }}</a>
 			</li>
 		  </ul>
 		</div>

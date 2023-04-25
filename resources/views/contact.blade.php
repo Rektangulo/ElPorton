@@ -39,14 +39,14 @@
 <div class="container" style="max-width: 80%;">
 	<h1 class="text-center m-5">{{ __('front.contact_title') }}</h1>
 	<h5 class="text-center mb-4">{{ __('front.contact_description') }}</h5>
-
+	
 	<form action="/contact" method="post">
 		@csrf
 		<div class="form-group mb-3">
-			<input type="text" name="name" id="name" class="form-control rounded-0" placeholder="{{ __('front.name_label') }}" required>
+			<input type="text" name="name" id="name" value="{{ auth()->user()->name ?? '' }}" class="form-control rounded-0" placeholder="{{ __('front.name_label') }}" required>
 		</div>
 		<div class="form-group mb-3">
-			<input type="email" name="email" id="email" class="form-control rounded-0" placeholder="{{ __('front.email_label') }}" required>
+			<input type="email" name="email" id="email" value="{{ auth()->user()->email ?? '' }}" class="form-control rounded-0" placeholder="{{ __('front.email_label') }}" required>
 		</div>
 		<div class="form-group mb-3">
 			<input type="number" name="number" id="number" class="form-control rounded-0" placeholder="{{ __('front.number_label') }}">
@@ -63,11 +63,21 @@
 		<div class="form-group mb-3">
 			<textarea name="message" id="message" class="form-control rounded-0" rows="7" placeholder="{{ __('front.message_label') }}" required></textarea>
 		</div>
+		<div class="form-group mb-3">
+			<div class="g-recaptcha" data-sitekey="6LcarrMlAAAAAC1OIuxhuSBhuymc8wOs_JNGjchd"></div>
+		</div>
 		<div class="form-group mb-3 d-flex justify-content-center">
-			<button type="submit" class="btn btn-primary rounded-0">{{ __('front.send_button') }}</button>
+			<!--id to redirect here if the message is sent-->
+			<button type="submit" class="btn btn-primary rounded-0" id="sent">{{ __('front.send_button') }}</button>
 		</div>
 	</form>
-</div>	
+</div>
+
+@if (session('success'))
+	<div class="alert alert-success mb-0 rounded-0 mb-4">
+		{{ session('success') }}
+	</div>
+@endif
 	
 <!--find us separator-->
 <div class="mt-5" id="map">
@@ -114,4 +124,5 @@
     </ul>
 </div>
 
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 @stop

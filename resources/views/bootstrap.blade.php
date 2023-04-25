@@ -1,3 +1,4 @@
+<!--has the bootstraps scripts and css. parent of every blade-->
 <!doctype html>
 <html lang="en">
 	<head>

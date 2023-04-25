@@ -21,9 +21,12 @@ return [
 	'categories' => 'Categories',
 	'home' => 'Home',
 	'reservations' => 'Reservations',
-	'events' => 'Events',
+	'messages' => 'Messages',
 	'dashboard' => 'Dashboard',
 	'resources' => 'Resources',
+				/*landing*/
+	'unread_messages' => 'Unread messages',
+	'no_unread_messages' => 'No unread messages',
 				/*etc*/
 	'actions' => 'Actions',
 	'select_prompt' => 'Select...',

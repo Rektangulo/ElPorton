@@ -1,36 +1,9 @@
-<!--layout blade for every landing page, with fonts, navbar and footer-->
+<!--layout blade for every frontend page, with fonts, navbar and footer-->
 @extends('bootstrap')
 <body class="bg-darker text-light"></body>
-<style>
-	.bg-darker {
-	  background-image: linear-gradient(to bottom, #191919, #171717)!important;
-	}
-	@font-face {
-	  font-family: "fournier";
-	  src: url("fonts/FournierMTStdRegular.woff") format('woff');
-	}
-	@font-face {
-	  font-family: "kentledge";
-	  src: url("fonts/kentledge-heavy.otf") format('otf');
-	}
-	@font-face {
-	  font-family: "cormorant";
-	  src: url("fonts/CormorantGaramond-BoldItalic.ttf") format('truetype');
-	}
-	@font-face {
-	  font-family: "raleway";
-	  src: url("fonts/Raleway-VariableFont_wght.ttf") format('truetype');
-	}
-	.bg-darker {
-		font-family: 'raleway', sans-serif;
-	}
-	.separator {
-		font-family: 'cormorant', serif;
-	}
-	.shadowed-image {
-		font-family: 'fournier', sans-serif;
-	}
-</style>
+<!--Custom css-->
+<link href="{{ asset('css/style.css') }}" rel="stylesheet">
+
 @section('page')
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid fs-3">
@@ -42,10 +15,17 @@
             <div class="navbar-nav ms-auto" style="margin-right: 5%;">
                 <a class="nav-link mx-1" href="/reservation">{{ __('front.reservation') }}</a>
 				<a class="nav-link mx-1" href="/menu">{{ __('front.menu') }}</a>
-				<a class="nav-link mx-1" href="/events">{{ __('front.events') }}</a>
 				<a class="nav-link mx-1" href="/contact">{{ __('front.contact') }}</a>
-				<a class="nav-link mx-1" href="/login">{{ __('front.login') }}</a>
-				<a class="nav-link mx-1" href="/register">{{ __('front.register') }}</a>
+				
+				@if (Auth::check())
+					<a class="nav-link mx-1" href="/profile">{{ __('front.profile') }}</a>
+					@if (Auth::user()->isAdmin())
+						<a class="nav-link mx-1" href="/admin">{{ __('front.admin') }}</a>
+					@endif
+				@else
+					<a class="nav-link mx-1" href="/login">{{ __('front.login') }}</a>
+					<a class="nav-link mx-1" href="/register">{{ __('front.register') }}</a>
+				@endif
             </div>
         </div>
     </div>
