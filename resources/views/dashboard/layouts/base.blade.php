@@ -9,7 +9,7 @@
 		  <span class="navbar-toggler-icon"></span>
 		</button>
 		<div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
-		  <ul class="navbar-nav">
+		  <ul class="navbar-nav d-flex align-items-center">
 			<li class="nav-item dropdown">
 			  <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
 				{{ __('headers.resources') }}
@@ -19,17 +19,20 @@
 				<li><a class="dropdown-item" href="/admin/menus">{{ __('headers.menus') }}</a></li>
 				<li><a class="dropdown-item" href="/admin/images">{{ __('headers.images') }}</a></li>
 				<li><a class="dropdown-item" href="/admin/tags">{{ __('headers.tags') }}</a></li>
-				  <li><a class="dropdown-item" href="/admin/categories">{{ __('headers.categories') }}</a></li>
+				<li><a class="dropdown-item" href="/admin/categories">{{ __('headers.categories') }}</a></li>
 			  </ul>
 			</li>
 			<li class="nav-item">
-			  <a class="nav-link me-2" href="/">{{ __('headers.home') }}</a>
+				<a class="nav-link me-2" href="/">{{ __('headers.home') }}</a>
 			</li>
 			<li class="nav-item">
-			  <a class="nav-link me-2" href="/admin/reservations">{{ __('headers.reservations') }}</a>
+				<a class="nav-link me-2" href="/admin/reservations">{{ __('headers.reservations') }}</a>
 			</li>
 			<li class="nav-item">
-			  <a class="nav-link me-2" href="/admin/messages">{{ __('headers.messages') }}</a>
+				<a class="nav-link me-2" href="/admin/messages">{{ __('headers.messages') }}</a>
+			</li>
+			<li>
+				<x-language-switcher/>
 			</li>
 		  </ul>
 		</div>

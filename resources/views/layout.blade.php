@@ -12,7 +12,8 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
-            <div class="navbar-nav ms-auto" style="margin-right: 5%;">
+            <div class="navbar-nav ms-auto d-flex align-items-center" style="margin-right: 5%;">
+				<div class="nav-link mx-1"><x-language-switcher/></div>
                 <a class="nav-link mx-1" href="/reservation">{{ __('front.reservation') }}</a>
 				<a class="nav-link mx-1" href="/menu">{{ __('front.menu') }}</a>
 				<a class="nav-link mx-1" href="/contact">{{ __('front.contact') }}</a>

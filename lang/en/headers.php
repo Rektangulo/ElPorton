@@ -24,9 +24,17 @@ return [
 	'messages' => 'Messages',
 	'dashboard' => 'Dashboard',
 	'resources' => 'Resources',
+	'profile' => 'Profile',
 				/*landing*/
 	'unread_messages' => 'Unread messages',
 	'no_unread_messages' => 'No unread messages',
+				/*messages*/
+	'show_all' => 'Show All',
+	'show_important' => 'Show Important',
+	'show_read' => 'Show Read',
+	'show_deleted' => 'Show Deleted',
+	'restore' => ' Restore', //space
+	'delete_icon' => ' Delete', //space. _icon because it is duplicated, with a space
 				/*etc*/
 	'actions' => 'Actions',
 	'select_prompt' => 'Select...',
@@ -47,5 +55,4 @@ return [
     'regexPrice' => 'The price must have a maximum of 2 digits after the decimal point, and be no longer than 6 digits.',
 	'file_error' => 'Please select the image again.',
 	'deletedSuccess' => 'Resource deleted successfully!',
-	/*'aaa' => 'aaa',*/
 ];

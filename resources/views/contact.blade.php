@@ -81,7 +81,7 @@
 	
 <!--find us separator-->
 <div class="mt-5" id="map">
-	<x-shadowed-image image="{{ asset('/images/contact/background.jpg') }}" text="Find us on" height="200px" font-size="60px" shadow-opacity="0.1" />
+	<x-shadowed-image image="{{ asset('/images/contact/background.jpg') }}" text="{{ __('front.find_us') }}" height="200px" font-size="60px" shadow-opacity="0.1" />
 </div>
 
 

@@ -16,6 +16,7 @@ return [
     'message_label' => 'Message:',
     'send_button' => 'Send',
 	'message_success' => 'Your message has been sent!',
+	'find_us' => 'Find us on',
     'restaurant_title' => 'Restaurant',
     'restaurant_hours1' => 'Monday-Friday: 7:00 AM - 12:00 PM',
     'restaurant_hours2' => 'Saturday: 9:00 AM - 1:00 AM',

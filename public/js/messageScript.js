@@ -69,13 +69,13 @@ function addDeleteMessageListeners() {
                     const icon = button.querySelector('i');
                     const textNode = button.lastChild;
                     if (response.data.isDeleted) {
-                        textNode.textContent = ' Restore';
+                        textNode.textContent = window.restoreText;
                         button.classList.remove('btn-danger');
                         button.classList.add('btn-success');
                         icon.classList.remove('fa-trash');
                         icon.classList.add('fa-trash-restore');
                     } else {
-                        textNode.textContent = ' Delete';
+                        textNode.textContent = window.deleteText;
                         button.classList.remove('btn-success');
                         button.classList.add('btn-danger');
                         icon.classList.remove('fa-trash-restore');

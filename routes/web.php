@@ -22,6 +22,12 @@ Route::get('/menu', [FrontController::class, 'menu']);
 Route::get('/contact', [FrontController::class, 'contact']);
 Route::post('/contact', [FrontController::class, 'submitContactForm']);
 
+Route::get('/language/{locale}', function ($locale) {
+    App::setLocale($locale);
+    session()->put('locale', $locale);
+    return redirect()->back();
+})->name('language.switch');
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
