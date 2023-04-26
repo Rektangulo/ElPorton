@@ -14,6 +14,8 @@ class ImageSeeder extends Seeder
     public function run(): void
     {
         $images = [
+								/*placeholder*/
+			['name' => 'Placeholder', 'image' => 'placeholder.jpg'],
 								/*tags*/
             ['name' => 'Crustacean', 'image' => 'tags/crustacean.png'],
             ['name' => 'Eggs', 'image' => 'tags/eggs.png'],

@@ -38,6 +38,8 @@
 						<td>
 							@if ($header === 'image_id')
 								{{ $row['image'] ? $row['image']->name : '' }}
+							@elseif ($title === 'Menus' && $header === 'recommended')
+								{{ $row[$header] ? __('headers.yes') : __('headers.no') }}
 							@else
 								{{ $row[$header] }}
 							@endif

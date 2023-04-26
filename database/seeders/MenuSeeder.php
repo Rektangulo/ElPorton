@@ -16,6 +16,11 @@ class MenuSeeder extends Seeder
     {
         $menus = Menu::factory()->count(40)->create();
 		
+		//6 recommended
+		$menus->random(6)->each(function ($menu) {
+			$menu->update(['recommended' => true]);
+		});
+		
 		$tagIds = Tag::pluck('id');
 
         foreach ($menus as $menu) {

@@ -18,7 +18,7 @@ class FrontController extends Controller
     public function menu()
     {
         $categories = Category::with('menus')->get();
-		$recommendedMenus = Menu::inRandomOrder()->take(6)->get();
+		$recommendedMenus = Menu::where('recommended', true)->get();
 		
         return view('menu', ['categories' => $categories,
 							 'recommendedMenus' => $recommendedMenus,

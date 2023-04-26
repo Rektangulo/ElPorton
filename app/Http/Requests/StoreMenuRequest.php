@@ -26,6 +26,13 @@ class StoreMenuRequest extends FormRequest
             'description' => 'required|string',
             'price' => 'required|numeric|regex:/^\d{1,6}(\.\d{1,2})?$/',
 			'category_id' => 'exists:categories,id',
+			'recommended' => [
+				function ($attribute, $value, $fail) {
+					if (!in_array($value, [true, false, 'on', 0], true)) {
+						$fail($attribute.' must be true or false.');
+					}
+				},
+			],
         ];
     }
 	

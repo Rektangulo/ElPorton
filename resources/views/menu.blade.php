@@ -8,6 +8,10 @@
 	.nav-tabs .nav-link:not(.active) {
 		color: white;
 	}
+	.card-img-top {
+		height: 325px;
+		object-fit: cover;
+	}
 </style>
 <div class="container" style="max-width: 80%;">
 	
@@ -25,10 +29,9 @@
 								
 								<!-- card -->
                                 <div class="card bg-dark text-white mx-auto" style="max-width: 20rem;" data-bs-toggle="modal" data-bs-target="#menuModal{{ $menu->id }}">
-                                    <img src="{{ '/images/' . $menu->image->image }}" alt="Menu Image" class="card-img-top">
+                                    <img src="{{ '/images/' . $menu->image->image }}" alt="Menu Image" class="card-img-top img-fluid">
                                     <div class="card-body">
                                         <h5 class="card-title">{{ $menu->name }}</h5>
-                                        <p class="card-text"><!--{{ $menu->description }}--></p>
                                     </div>
                                 </div>
 								

@@ -17,6 +17,7 @@ class Menu extends Model
 		"price",
 		"image_id",
 		"category_id",
+		"recommended",
 	];
 	
 	public function image()

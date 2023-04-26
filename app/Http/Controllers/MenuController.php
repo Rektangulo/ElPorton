@@ -22,9 +22,9 @@ class MenuController extends Controller
      */
 	public function index(Request $request)
 	{
-		$headers = ['name', 'description', 'price', 'image_id'];
+		$headers = ['name', 'description', 'price', 'image_id', 'recommended'];
 		$search = $request->input('search');
-		$menus = Menu::select('id', 'name', 'description', 'price', 'image_id')->where('name', 'like', '%' . $search . '%')->paginate(10);
+		$menus = Menu::select('id', 'name', 'description', 'price', 'image_id', 'recommended')->where('name', 'like', '%' . $search . '%')->paginate(10);
 		session()->put('previousUrl', request()->fullUrl());
 
 		return view('dashboard.layouts.index', ['title' => 'Menus',
@@ -40,7 +40,7 @@ class MenuController extends Controller
     {
 		$images = Image::all();
 		$tags = Tag::all();
-		$attributes = ['name', 'description', 'price', 'image_id', 'category_id'];
+		$attributes = ['name', 'description', 'price', 'image_id', 'category_id', 'recommended'];
         return view('dashboard.layouts.create', ['attributes' => $attributes,
 												 'resourceType' => 'menu',
 												 'nextRoute' => 'App\Http\Controllers\MenuController@store',
@@ -57,7 +57,6 @@ class MenuController extends Controller
     {
 
 		$menu = new Menu;
-		$data = $request->validated();
 		
 		// Handle file upload
 		if ($request->hasFile('image')) {
@@ -74,7 +73,12 @@ class MenuController extends Controller
 			$menu->image()->associate($image);
     	}
 		
-		$menu->fill($request->except('image'));
+		if ($request->has('recommended')) {
+			$menu->recommended = true;
+		} else {
+			$menu->recommended = false;
+		}
+		$menu->fill($request->except(['image','recommended']));
 		$menu->save();
 		
 		// Update tags
@@ -122,7 +126,7 @@ class MenuController extends Controller
      */
     public function update(StoreMenuRequest $request, String $id)
     {
-		$data = $request->validated();
+		//$data = $request->validated();
 		$menu = Menu::find($id);
 
 		// Handle file upload
@@ -144,7 +148,13 @@ class MenuController extends Controller
 		$tags = $request->input('tags', []);
 		$menu->tags()->sync($tags);
 		
-		$menu->fill($request->except('image'));
+		if ($request->has('recommended')) {
+			$menu->recommended = true;
+		} else {
+			$menu->recommended = false;
+		}
+		
+		$menu->fill($request->except(['image','recommended']));
 		$menu->save();
 		return redirect()->route('admin.menus.show', ['menu' => $id]);
     }
@@ -157,6 +167,6 @@ class MenuController extends Controller
 		$menu = Menu::findOrFail($id);
 		$menu->delete();
 		session()->flash('success', trans('headers.deletedSuccess'));
-		return redirect()->route('admin.menus.index');
+		return redirect()->back();
     }
 }

@@ -12,7 +12,10 @@ class AdminDashboardController extends Controller
      */
     public function landing(Request $request)
     {
+		$unreadMessagesCount = ContactMessage::where('read', false)->count();
 		$unreadMessages = ContactMessage::where('read', false)->orderBy('created_at', 'desc')->paginate(3);
-        return view('dashboard.landing', ['unreadMessages' => $unreadMessages]);
+        return view('dashboard.landing', ['unreadMessages' => $unreadMessages,
+										  'unreadMessagesCount' => $unreadMessagesCount,
+										 ]);
     }
 }

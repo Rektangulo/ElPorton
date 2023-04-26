@@ -9,10 +9,13 @@ return [
 	'price' => 'Price',
 	'image' => 'Image',
 	'image_id' => 'Image',
+	'recommended' => 'Recommended',
 	'tags:' => 'Tags:',
 	'category_id' => 'Category',
 	'or_upload' => 'Or upload:',
 	'none' => 'None',
+	'yes' => 'Yes',
+	'no' => 'No',
 				/*navbar*/
 	'users' => 'Users',
 	'menus' => 'Menus',

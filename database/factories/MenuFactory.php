@@ -20,7 +20,7 @@ class MenuFactory extends Factory
             'name' => $this->faker->words(2, true),
 			'description' => $this->faker->sentences($nb = $this->faker->numberBetween(1, 4), $asText = true),
             'price' => $this->faker->randomFloat(2, 5, 20),
-            'image_id' => $this->faker->numberBetween(9, 20),
+            'image_id' => $this->faker->numberBetween(10, 21),
 			'category_id' => $this->faker->numberBetween(1, 7),
         ];
     }

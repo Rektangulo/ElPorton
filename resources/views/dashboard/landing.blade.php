@@ -8,7 +8,7 @@
 			{{ __('headers.no_unread_messages') }}
 		@else
 			{{ __('headers.unread_messages') }}
-			<span class="badge text-bg-primary">{{ $unreadMessages->count() }}</span>
+			<span class="badge text-bg-primary">{{ $unreadMessagesCount }}</span>
 		@endif
 	</h2>
 	

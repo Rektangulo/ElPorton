@@ -16,8 +16,9 @@
         @foreach ($attributes as $attribute)
             @if (!in_array($attribute, ['id', 'created_at', 'updated_at']))
                 <div class="form-group mb-4">
-                    <label class="fs-5" for="{{ $attribute }}">{{ ucfirst(__('headers.'.$attribute)) }}</label>
-					
+					@if ($attribute != 'recommended')
+                    	<label class="fs-5" for="{{ $attribute }}">{{ ucfirst(__('headers.'.$attribute)) }}</label>
+					@endif
 					<!--images-->
 					@if ($attribute === 'image_id')
 						<!--Shows the name if its disabled, shows the select or upload if not-->
@@ -47,6 +48,11 @@
 								<option value="{{ $category->id }}" {{ $category->id == old($attribute) ? 'selected' : '' }}>{{ $category->name }}</option>
 							@endforeach
 						</select>
+					
+					<!--recommended menu-->
+					@elseif ($attribute === 'recommended')
+						<input type="checkbox" id="{{ $attribute }}" name="{{ $attribute }}" class="btn-check" {{ old($attribute) ? 'checked' : '' }}>
+						<label class="btn btn-outline-primary fs-4" for="{{ $attribute }}">{{ $attribute }}</label>
 					
 					<!--default text-->
 					@else
