@@ -50,8 +50,8 @@
 							<li><a href="/register">{{ __('front.register') }}</a></li>
 							<li><a href="/login">{{ __('front.login') }}</a></li>
 							<li><a href="/reservation">{{ __('front.make_reservation') }}</a></li>
-							<li><a href="/terms">{{ __('front.terms_of_service') }}</a></li>
-							<li><a href="/cookie-consent">{{ __('front.cookie_consent') }}</a></li>
+							<li><a href="/cookie-consent#terms">{{ __('front.terms_of_service') }}</a></li>
+							<li><a href="/cookie-consent#cookies">{{ __('front.cookie_consent') }}</a></li>
 						</ul>
 					</div>
 					<div class="col-12 col-md min-width">

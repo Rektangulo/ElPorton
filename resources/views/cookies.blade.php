@@ -1,6 +1,27 @@
 @extends('layout')
 @section('content')
-<div class="container">
+
+<!--Terms of service-->
+<div id="terms" class="container">
+<h1 class="my-4">{{ __('front.terms_of_service') }}</h1>
+	<div class="fs-5">
+	<p>{{ __('front.welcome_to_our_restaurant') }}</p>
+	<ol>
+		<li>{{ __('front.prices_subject_to_change') }}</li>
+		<li>{{ __('front.right_to_refuse_service') }}</li>
+		<li>{{ __('front.not_responsible_for_lost_items') }}</li>
+		<li>{{ __('front.accommodate_dietary_restrictions') }}</li>
+		<li>{{ __('front.no_outside_food') }}</li>
+		<li>{{ __('front.accurate_information') }}</li>
+		<li>{{ __('front.cancellations') }}</li>
+		<li>{{ __('front.dispute_resolution') }}</li>
+	</ol>
+	<p>{{ __('front.thank_you') }}</p>
+	</div>
+</div>
+
+<!--Cookies-->
+<div id="cookies" class="container">
   <h1 class="my-4">{{ __('front.cookies') }}</h1>
   <p class="fs-5">{!! __('front.cookie_consent_message_long') !!}</p>
 

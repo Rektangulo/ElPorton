@@ -1,6 +1,18 @@
 <?php
 
 return [
+						/*Terms*/
+	'terms_of_service' => 'Terms of Service',
+    'welcome_to_our_restaurant' => 'Welcome to our restaurant! By using our services, you agree to the following terms and conditions:',
+    'prices_subject_to_change' => 'All prices are subject to change without notice.',
+    'right_to_refuse_service' => 'We reserve the right to refuse service to anyone for any reason.',
+    'not_responsible_for_lost_items' => 'We are not responsible for lost or stolen items.',
+    'accommodate_dietary_restrictions' => 'We do our best to accommodate dietary restrictions and allergies, but cannot guarantee that our food is free from allergens.',
+    'no_outside_food' => 'We do not allow outside food or beverages in the restaurant.',
+    'accurate_information' => 'By making a reservation or placing an order, you agree to provide accurate and complete information, including your name, contact information, and payment details.',
+    'cancellations' => 'Cancellations or changes to reservations or orders must be made at least 24 hours in advance.',
+    'dispute_resolution' => 'In the event of a dispute, we will attempt to resolve the issue amicably through negotiation or mediation. If we are unable to reach a resolution, the dispute will be settled through arbitration or litigation in accordance with applicable law.',
+    'thank_you' => 'Thank you for choosing us, we hope you enjoy your meal!',
 						/*Cookies*/
 	'cookie_consent_message' => 'We use cookies to improve your experience on our website. By continuing to use our site, you agree to our use of cookies.',
 	'cookies' => 'Cookies',
