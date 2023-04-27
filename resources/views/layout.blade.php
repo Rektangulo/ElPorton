@@ -34,7 +34,7 @@
 
 	
 @yield('content')
-
+<x-cookie-banner/>
 <footer class="footer mt-auto py-5 bg-dark bg-gradient text-warning">
 	<div class="container">
 		<div class="row align-items-center justify-content-center">

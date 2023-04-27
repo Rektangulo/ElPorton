@@ -1,6 +1,19 @@
 <?php
 
 return [
+						/*Cookies*/
+	'cookie_consent_message' => 'We use cookies to improve your experience on our website. By continuing to use our site, you agree to our use of cookies.',
+	'cookies' => 'Cookies',
+  'learn_more' => 'Learn more',
+	'accept' => 'Accept',
+	'decline' => 'Decline',
+	'cookie_consent_message_long' => 'We use cookies on our website to improve your browsing experience and to personalize the content and ads we show you.<br><br>Cookies are small text files that are stored on your device when you visit our website. Some of the cookies we use are essential for the operation of the website, such as session and security cookies. Other cookies help us understand how users interact with our website and improve their browsing experience.<br><br>We also use third-party cookies to display personalized ads and to collect information about how users interact with our website and our ads. If you accept the use of cookies, we will store a cookie on your device to remember your choice. If you decline the use of cookies, we will not store any non-essential cookies on your device.<br><br>You can change your cookie preferences at any time in this cookie settings page. You can also delete cookies stored on your device through your browser settings. If you have any questions about how we use cookies on our website, please do not hesitate to contact us.',
+	'cookie_settings' => 'Cookie Settings',
+	'essential_cookies' => 'Essential Cookies',
+	'analytics_cookies' => 'Analytics Cookies',
+	'advertising_cookies' => 'Advertising Cookies',
+	'save_settings' => 'Save Settings',
+	'cookie_feedback' => 'Your cookie settings have been saved.',
 						/*CONTACT PAGE*/
 	'contact_title' => 'CONTACT US',
     'contact_description' => "We’d love to hear from you! Use the form below to send us a message and we’ll get back to you as soon as we can. If you prefer, you can also reach us by email at example@example.com or by phone at 123-456-7890. Whether you have a question about our menu, need help with reservations, or are interested in booking a private event, we’re here to help.",

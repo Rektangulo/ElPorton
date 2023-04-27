@@ -15,6 +15,11 @@ class FrontController extends Controller
 		return view('landing');
 	}
 	
+	public function cookie()
+	{
+		return view('cookies');
+	}
+	
     public function menu()
     {
         $categories = Category::with('menus')->get();

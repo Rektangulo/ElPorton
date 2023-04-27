@@ -21,6 +21,7 @@ Route::get('/', [FrontController::class, 'landing']);
 Route::get('/menu', [FrontController::class, 'menu']);
 Route::get('/contact', [FrontController::class, 'contact']);
 Route::post('/contact', [FrontController::class, 'submitContactForm']);
+Route::get('/cookie-consent', [FrontController::class, 'cookie']);
 
 Route::get('/language/{locale}', function ($locale) {
     App::setLocale($locale);

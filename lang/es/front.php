@@ -1,6 +1,19 @@
 <?php
 
 return [
+	/*Cookies*/
+	'cookie_consent_message' => 'Usamos cookies para mejorar su experiencia en nuestro sitio web. Al continuar usando nuestro sitio, acepta nuestro uso de cookies.',
+	'cookies' => 'Cookies',
+  'learn_more' => 'Saber más',
+	'accept' => 'Accept',
+	'decline' => 'Decline',
+	'cookie_consent_message_long' => 'Usamos cookies en nuestro sitio web para mejorar tu experiencia de navegación y para personalizar el contenido y los anuncios que te mostramos.<br><br>Las cookies son pequeños archivos de texto que se almacenan en tu dispositivo cuando visitas nuestro sitio web. Algunas de las cookies que utilizamos son esenciales para el funcionamiento del sitio web, como las cookies de sesión y seguridad. Otras cookies nos ayudan a entender cómo los usuarios interactúan con nuestro sitio web y a mejorar su experiencia de navegación.<br><br>También utilizamos cookies de terceros para mostrar anuncios personalizados y para recopilar información sobre cómo los usuarios interactúan con nuestro sitio web y con nuestros anuncios. Si aceptas el uso de cookies, almacenaremos una cookie en tu dispositivo para recordar tu elección. Si rechazas el uso de cookies, no almacenaremos ninguna cookie no esencial en tu dispositivo.<br><br>Puedes cambiar tus preferencias de cookies en cualquier momento en esta página de configuración de cookies. También puedes eliminar las cookies almacenadas en tu dispositivo a través de la configuración de tu navegador. Si tienes alguna pregunta sobre cómo utilizamos las cookies en nuestro sitio web, no dudes en contactarnos.',
+	'cookie_settings' => 'Opciones de Cookies',
+	'essential_cookies' => 'Cookies esenciales',
+	'analytics_cookies' => 'Cookies analíticas',
+	'advertising_cookies' => 'Cookies de anuncios',
+	'save_settings' => 'Guardar cambios',
+	'cookie_feedback' => 'Se han guardado tus preferencias.',
 	/*PÁGINA DE CONTACTO*/
     'contact_title' => 'CONTÁCTENOS',
     'contact_description' => "Utiliza el formulario a continuación para enviarnos un mensaje y nos pondremos en contacto contigo lo antes posible. Si lo prefieres, también puedes comunicarte con nosotros por correo electrónico a example@example.com o por teléfono al 123-456-7890. Ya sea que tengas una pregunta sobre nuestro menú, necesites ayuda con las reservas o estés interesado en reservar un evento privado, estamos aquí para ayudarte.",
