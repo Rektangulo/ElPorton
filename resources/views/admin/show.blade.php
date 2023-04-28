@@ -8,14 +8,14 @@
 		- 'showTags': show tag html
 		- 'tags': all tag instances
 -->
-@extends('dashboard.layouts.base')
+@extends('admin.layouts.base')
 @section('content')
 
 <div class="container bg-dark text-white" style="padding-top: 30px;">
 	@empty($disabled)
-		<h1 class="text-center mb-4">{{ __('headers.edit_resource') }}</h1>
+		<h1 class="text-center mb-4">{{ __('admin.edit_resource') }}</h1>
 	@else
-		<h1 class="text-center mb-4">{{ __('headers.view_resource') }}</h1>
+		<h1 class="text-center mb-4">{{ __('admin.view_resource') }}</h1>
 	@endempty
     <form action="{{ action($nextRoute, [$resourceType => $resource->id]) }}" method="POST" enctype="multipart/form-data" class="mb-3">
 		@method('PUT')
@@ -26,7 +26,7 @@
             @if (!in_array($attribute, ['id', 'created_at', 'updated_at', 'image']))
 				<div class="form-group mb-4">
 					@if ($attribute != 'recommended')
-						<label class="fs-5" for="{{ $attribute }}">{{ __('headers.'.$attribute) }}</label>
+						<label class="fs-5" for="{{ $attribute }}">{{ __('admin.'.$attribute) }}</label>
 					@endif
 					<!--images-->
 					@if ($attribute === 'image_id')
@@ -38,12 +38,12 @@
 								<!--if there is no images only the file prompt will be shown-->
 								@isset($images)
 									<select id="image" name="selected-image" class="form-select fs-5">
-										<option value="">{{ __('headers.select_prompt') }}</option>
+										<option value="">{{ __('admin.select_prompt') }}</option>
 										@foreach ($images as $image)
 											<option value="{{ $image->id }}" {{ $image->id == old('selected-image', $value) ? 'selected' : '' }}>{{ $image->name }}</option>
 										@endforeach
 									</select>
-									<label class="input-group-text" for="image-upload">{{ __('headers.or_upload') }}</label>
+									<label class="input-group-text" for="image-upload">{{ __('admin.or_upload') }}</label>
 								@endisset
 								<input type="file" id="image-upload" name="image" class="form-control">
 							</div>
@@ -57,9 +57,9 @@
 					@elseif ($attribute === 'category_id')
 						<select id="{{ $attribute }}" name="{{ $attribute }}" class="form-select form-select-lg" @isset($disabled) disabled @endisset>
 							@if(isset($disabled) && $resource->category_id === null)
-								<option value="">{{ __('headers.none') }}</option>
+								<option value="">{{ __('admin.none') }}</option>
 							@endif
-							<option value="">{{ __('headers.select_prompt') }}</option>
+							<option value="">{{ __('admin.select_prompt') }}</option>
 							@foreach (\App\Models\Category::all() as $category)
 								<option value="{{ $category->id }}" {{ $category->id == old($attribute, $value) ? 'selected' : '' }}>{{ $category->name }}</option>
 							@endforeach
@@ -80,7 +80,7 @@
 		
 		<!--tag section-->
 		@isset($showTags)
-			<label for="tags" class="form-label fs-5">{{ __('headers.tags:') }}</label>
+			<label for="tags" class="form-label fs-5">{{ __('admin.tags:') }}</label>
 			@empty($disabled)
 				<select name="tags[]" id="tags" multiple class="form-select mb-3" size="6">
 					@foreach ($tags as $tag)
@@ -113,11 +113,11 @@
 		@endif
         <div class="d-flex justify-content-center">
 			@empty($disabled)
-            	<button type="submit" class="btn btn-primary" style="margin-right: 20px;">{{ __('headers.save') }}</button>
+            	<button type="submit" class="btn btn-primary" style="margin-right: 20px;">{{ __('admin.save') }}</button>
 			@else
-				<a href="{{$resource->id . "/edit"}}" class="btn btn-warning" style="margin-right: 20px;">{{ __('headers.edit') }}</a>
+				<a href="{{$resource->id . "/edit"}}" class="btn btn-warning" style="margin-right: 20px;">{{ __('admin.edit') }}</a>
 			@endempty
-            <a href="{{ session('previousUrl', '/default-url') }}" class="btn btn-secondary">{{ __('headers.return') }}</a>
+            <a href="{{ session('previousUrl', '/default-url') }}" class="btn btn-secondary">{{ __('admin.return') }}</a>
         </div>
     </form>
 </div>

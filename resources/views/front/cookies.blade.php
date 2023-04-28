@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('front.layout')
 @section('content')
 
 <!--Terms of service-->

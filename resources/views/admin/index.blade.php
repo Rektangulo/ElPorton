@@ -4,7 +4,7 @@
 		- 'data' => the resources to show, using all() or similar
 		- 'headers' => array with the table headers without the action buttons,
 -->
-@extends('dashboard.layouts.base')
+@extends('admin.layouts.base')
 @section('content')
 <div style="padding-top: 30px;">
 	<h1 class="text-center mb-4">{{$title}}</h1>
@@ -19,16 +19,16 @@
                 <th colspan="{{ count($headers) + 1 }}">
                     <form method="GET" action="{{ url(request()->path()) }}" class="d-flex justify-content-end">
                         <input type="text" name="search" placeholder="Search..." class="form-control me-2">
-                        <button type="submit" class="btn btn-outline-success me-2">{{ __('headers.search') }}</button>
-                        <a href="{{ url(request()->path()) }}" class="btn btn-outline-danger">{{ __('headers.reset') }}</a>
+                        <button type="submit" class="btn btn-outline-success me-2">{{ __('admin.search') }}</button>
+                        <a href="{{ url(request()->path()) }}" class="btn btn-outline-danger">{{ __('admin.reset') }}</a>
                     </form>
                 </th>
             </tr>
 			<tr>
 				@foreach ($headers as $header)
-					<th>{{ __('headers.'.$header) }}</th>
+					<th>{{ __('admin.'.$header) }}</th>
 				@endforeach
-				<th>{{ __('headers.actions') }}</th>
+				<th>{{ __('admin.actions') }}</th>
 			</tr>
 		</thead>
 		<tbody class="table-group-divider">
@@ -39,7 +39,7 @@
 							@if ($header === 'image_id')
 								{{ $row['image'] ? $row['image']->name : '' }}
 							@elseif ($title === 'Menus' && $header === 'recommended')
-								{{ $row[$header] ? __('headers.yes') : __('headers.no') }}
+								{{ $row[$header] ? __('admin.yes') : __('admin.no') }}
 							@else
 								{{ $row[$header] }}
 							@endif
@@ -55,18 +55,18 @@
                             <div class="modal-dialog">
                                 <div class="modal-content bg-dark text-white">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="deleteModalLabel{{$row['id']}}">{{ __('headers.delete') }} {{ $row['name'] }}</h5>
+                                        <h5 class="modal-title" id="deleteModalLabel{{$row['id']}}">{{ __('admin.delete') }} {{ $row['name'] }}</h5>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                                     </div>
                                     <div class="modal-body">
-										{{ __('headers.confirm_delete') }}
+										{{ __('admin.confirm_delete') }}
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ __('headers.cancel') }}</button>
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ __('admin.cancel') }}</button>
                                         <form action="{{ url(request()->path(). '/' . $row['id']) }}" method="POST">
                                             @csrf
                                             @method('DELETE')
-											<button type="submit" class="btn btn-danger">{{ __('headers.delete') }}</button>
+											<button type="submit" class="btn btn-danger">{{ __('admin.delete') }}</button>
                                         </form>
                                     </div>
                                 </div>
@@ -80,7 +80,7 @@
 			<!--add button-->
 			<tr data-href="{{ url(request()->path().'/create') }}">
 				<td colspan="{{count($headers)+1}}" align="center">
-					<a href="{{ url(request()->path().'/create') }}" class="btn btn-success">{{ __('headers.create_new') }}<i class="fas fa-plus-square"></i></a>
+					<a href="{{ url(request()->path().'/create') }}" class="btn btn-success">{{ __('admin.create_new') }}<i class="fas fa-plus-square"></i></a>
 				</td>
 			</tr>
 			

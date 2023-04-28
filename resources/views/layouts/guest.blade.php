@@ -21,7 +21,7 @@
 		<div class="min-h-screen flex flex-col items-center justify-center bg-darker">
 			<div class="mb-6">
 				<a href="/">
-					<img src="{{ asset('images/logo.png') }}" alt="Logo" class="logo-sm">
+					<img src="{{ asset('images/logos/logo.png') }}" alt="Logo" class="logo-sm">
 				</a>
 			</div>
 			<div class="w-full sm:max-w-md px-6 py-4 bg-dark shadow-md overflow-hidden">

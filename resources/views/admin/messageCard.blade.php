@@ -25,7 +25,7 @@
 			<button class="btn mx-1 mark-as-read {{ $message->read ? 'btn-secondary	' : 'btn-primary' }}"><i class="fas {{ $message->read ? 'fa-envelope-open' : 'fa-envelope' }}"></i></button>
 			<button class="btn mx-1 delete-message {{ $message->trashed() ? 'btn-success' : 'btn-danger' }}">
 				<i class="fas {{ $message->trashed() ? 'fa-trash-restore' : 'fa-trash' }}"></i>
-				{{ $message->trashed() ? __('headers.restore') : __('headers.delete') }}
+				{{ $message->trashed() ? __('admin.restore') : __('admin.delete') }}
 			</button>
 		</div>
 	</div>

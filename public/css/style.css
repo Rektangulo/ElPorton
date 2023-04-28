@@ -3,10 +3,6 @@
   src: url("../fonts/FournierMTStdRegular.woff") format('woff');
 }
 @font-face {
-  font-family: "kentledge";
-  src: url("../fonts/kentledge-heavy.otf") format('otf');
-}
-@font-face {
   font-family: "cormorant";
   src: url("../fonts/CormorantGaramond-BoldItalic.ttf") format('truetype');
 }

@@ -3,8 +3,8 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FrontController;
-use App\Http\Controllers\AdminDashboardController;
-use App\Http\Controllers\ContactMessageController;
+use App\Http\Controllers\Admin\AdminDashboardController;
+use App\Http\Controllers\Admin\ContactMessageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,10 +34,10 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'admin' ], function () {
-    Route::resource('menus', 'App\Http\Controllers\MenuController');
-    Route::resource('images', 'App\Http\Controllers\ImageController');
-    Route::resource('tags', 'App\Http\Controllers\TagController');
-    Route::resource('categories', 'App\Http\Controllers\CategoryController');
+    Route::resource('menus', 'App\Http\Controllers\Admin\MenuController');
+    Route::resource('images', 'App\Http\Controllers\Admin\ImageController');
+    Route::resource('tags', 'App\Http\Controllers\Admin\TagController');
+    Route::resource('categories', 'App\Http\Controllers\Admin\CategoryController');
 	
 	/*messages*/
 	Route::get('/', [AdminDashboardController::class, 'landing']);

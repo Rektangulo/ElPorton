@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -29,7 +29,7 @@ class ImageUpdateRequest extends FormRequest
 	public function messages()
     {
         return [
-            'name.required' => trans('validation.required', ['attribute' => 'name']),
+            'name.required' => __('validation.required', ['attribute' => 'name']),
         ];
     }
 }

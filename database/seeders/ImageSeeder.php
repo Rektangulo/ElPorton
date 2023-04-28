@@ -15,7 +15,7 @@ class ImageSeeder extends Seeder
     {
         $images = [
 								/*placeholder*/
-			['name' => 'Placeholder', 'image' => 'placeholder.jpg'],
+			['name' => 'Placeholder', 'image' => 'public/placeholder.jpg'],
 								/*tags*/
             ['name' => 'Crustacean', 'image' => 'tags/crustacean.png'],
             ['name' => 'Eggs', 'image' => 'tags/eggs.png'],

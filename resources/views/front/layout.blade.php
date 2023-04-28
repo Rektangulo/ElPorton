@@ -7,7 +7,7 @@
 @section('page')
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid fs-3">
-        <a class="navbar-brand" href="/"><img src="{{ asset('images/logo-text.png') }}" class="logo" height="100" alt="Logo"></a>
+        <a class="navbar-brand" href="/"><img src="{{ asset('images/logos/logo-text.png') }}" class="logo" height="100" alt="Logo"></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -39,7 +39,7 @@
 	<div class="container">
 		<div class="row align-items-center justify-content-center">
 			<div class="col-auto mb-3 mb-md-0">
-				<a href="/" class="no-animation"><img src="{{ asset('images/logo.png') }}" alt="Logo" width="220" class="img-fluid mb-5"></a>
+				<a href="/" class="no-animation"><img src="{{ asset('images/logos/logo.png') }}" alt="Logo" width="220" class="img-fluid mb-5"></a>
 			</div>
 			<div class="col-12 col-md-auto">
 				<div class="row text-center gx-5">

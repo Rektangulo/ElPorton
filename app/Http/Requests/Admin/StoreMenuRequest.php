@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -39,10 +39,10 @@ class StoreMenuRequest extends FormRequest
 	public function messages()
     {
         return [
-            'name.required' => trans('validation.required', ['attribute' => 'name']),
-            'description.required' => trans('validation.required', ['attribute' => 'description']),
-            'price.required' => trans('validation.required', ['attribute' => 'price']),
-            'price.regex' => trans('headers.regexPrice', ['attribute' => 'price'])
+            'name.required' => __('validation.required', ['attribute' => 'name']),
+            'description.required' => __('validation.required', ['attribute' => 'description']),
+            'price.required' => __('validation.required', ['attribute' => 'price']),
+            'price.regex' => __('admin.regexPrice', ['attribute' => 'price'])
         ];
     }
 }

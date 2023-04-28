@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -30,9 +30,9 @@ class ImageUploadRequest extends FormRequest
 /*	public function messages()
     {
         return [
-            'name.required' => trans('validation.required', ['attribute' => 'name']),
-            'image.required' => trans('validation.required', ['attribute' => 'image']),
-            'image.max' => trans('validation.max.file', ['attribute' => 'image'])
+            'name.required' => __('validation.required', ['attribute' => 'name']),
+            'image.required' => __('validation.required', ['attribute' => 'image']),
+            'image.max' => __('validation.max.file', ['attribute' => 'image'])
         ];
     }*/
 }

@@ -1,15 +1,16 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
-use App\Http\Requests\StoreMenuRequest;
+use App\Http\Requests\Admin\StoreMenuRequest;
 use App\Models\Menu;
 use App\Models\Image;
 use App\Models\Tag;
 use Illuminate\Support\Facades\Storage;
 use App\Services\ImageUploadService;
 use Illuminate\Http\RedirectResponse;
+use App\Http\Controllers\Controller;
 
 /*
 	TODO refactor headers to the model
@@ -27,7 +28,7 @@ class MenuController extends Controller
 		$menus = Menu::select('id', 'name', 'description', 'price', 'image_id', 'recommended')->where('name', 'like', '%' . $search . '%')->paginate(10);
 		session()->put('previousUrl', request()->fullUrl());
 
-		return view('dashboard.layouts.index', ['title' => 'Menus',
+		return view('admin.index', ['title' => 'Menus',
 												'data' => $menus,
 												'headers' => $headers,
 											   ]);
@@ -41,9 +42,9 @@ class MenuController extends Controller
 		$images = Image::all();
 		$tags = Tag::all();
 		$attributes = ['name', 'description', 'price', 'image_id', 'category_id', 'recommended'];
-        return view('dashboard.layouts.create', ['attributes' => $attributes,
+        return view('admin.create', ['attributes' => $attributes,
 												 'resourceType' => 'menu',
-												 'nextRoute' => 'App\Http\Controllers\MenuController@store',
+												 'nextRoute' => 'App\Http\Controllers\Admin\MenuController@store',
 												 'images' => $images,
 												 'showTags' => '1',
                                                	 'tags' => $tags,
@@ -95,9 +96,9 @@ class MenuController extends Controller
     {
         $menu = Menu::find($id);
 		$images = Image::all();
-    	return view('dashboard.layouts.show', ['resource' => $menu,
+    	return view('admin.show', ['resource' => $menu,
 											   'resourceType' => 'menu',
-											   'nextRoute' => 'App\Http\Controllers\MenuController@update', //?
+											   'nextRoute' => 'App\Http\Controllers\Admin\MenuController@update', //?
 											   'images' => $images,
 											   'disabled' => '1',
 											   'showTags' => '1',
@@ -112,9 +113,9 @@ class MenuController extends Controller
 		$menu = Menu::find($id);
 		$images = Image::all();
 		$tags = Tag::all();
-    	return view('dashboard.layouts.show', ['resource' => $menu,
+    	return view('admin.show', ['resource' => $menu,
 											   'resourceType' => 'menu',
-											   'nextRoute' => 'App\Http\Controllers\MenuController@update',
+											   'nextRoute' => 'App\Http\Controllers\Admin\MenuController@update',
 											   'images' => $images,
 											   'showTags' => 1,
 											   'tags' => $tags,
@@ -166,7 +167,7 @@ class MenuController extends Controller
     {
 		$menu = Menu::findOrFail($id);
 		$menu->delete();
-		session()->flash('success', trans('headers.deletedSuccess'));
+		session()->flash('success', __('admin.deletedSuccess'));
 		return redirect()->back();
     }
 }

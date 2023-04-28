@@ -1,7 +1,7 @@
 <?php
 
 return [
-
+	'log_in_message' => 'You\'re logged in!',
     'dashboard' => 'Dashboard',
 	'profile' => 'Profile',
 	'log_out' => 'Log Out',

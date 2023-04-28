@@ -1,7 +1,7 @@
 <?php
 
 return [
-
+	'log_in_message' => '¡Has iniciado sesión!',
     'dashboard' => 'Panel de control',
     'profile' => 'Perfil',
     'log_out' => 'Cerrar sesión',

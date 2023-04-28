@@ -1,15 +1,16 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
-use App\Http\Requests\ImageUploadRequest;
-use App\Http\Requests\ImageUpdateRequest;
+use App\Http\Requests\Admin\ImageUploadRequest;
+use App\Http\Requests\Admin\ImageUpdateRequest;
 use App\Models\Image;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
 use App\Services\ImageUploadService;
 use Illuminate\Http\RedirectResponse;
+use App\Http\Controllers\Controller;
 
 class ImageController extends Controller
 {
@@ -23,7 +24,7 @@ class ImageController extends Controller
 		$images = Image::select('id', 'name', 'image')->where('name', 'like', '%' . $search . '%')->paginate(10);
 		session()->put('previousUrl', request()->fullUrl());
 
-		return view('dashboard.layouts.index', ['title' => 'Images',
+		return view('admin.index', ['title' => 'Images',
 												'data' => $images,
 												'headers' => $headers,
 											   ]);
@@ -35,9 +36,9 @@ class ImageController extends Controller
     public function create()
     {
 		$attributes = ['name', 'image_id'];
-        return view('dashboard.layouts.create', ['attributes' => $attributes,
+        return view('admin.create', ['attributes' => $attributes,
 												 'resourceType' => 'menu',
-												 'nextRoute' => 'App\Http\Controllers\ImageController@store',
+												 'nextRoute' => 'App\Http\Controllers\Admin\ImageController@store',
 											  ]);
     }
 
@@ -59,9 +60,9 @@ class ImageController extends Controller
     public function show(string $id)
     {
         $image = Image::find($id);
-    	return view('dashboard.layouts.show', ['resource' => $image,
+    	return view('admin.show', ['resource' => $image,
 											   'resourceType' => 'image',
-											   'nextRoute' => 'App\Http\Controllers\ImageController@update', //?
+											   'nextRoute' => 'App\Http\Controllers\Admin\ImageController@update', //?
 											   'disabled' => '1'
 											  ]);
     }
@@ -72,9 +73,9 @@ class ImageController extends Controller
     public function edit(string $id)
     {
         $image = Image::find($id);
-    	return view('dashboard.layouts.show', ['resource' => $image,
+    	return view('admin.show', ['resource' => $image,
 											   'resourceType' => 'image',
-											   'nextRoute' => 'App\Http\Controllers\ImageController@update',
+											   'nextRoute' => 'App\Http\Controllers\Admin\ImageController@update',
 											  ]);
     }
 
@@ -97,7 +98,7 @@ class ImageController extends Controller
 		$path = public_path('images/' . $image->image);
 		File::delete($path);
         $image->delete();
-		session()->flash('success', trans('headers.deletedSuccess'));
+		session()->flash('success', __('admin.deletedSuccess'));
 		return redirect()->route('admin.images.index');
     }
 }

@@ -1,20 +1,20 @@
 <!--landing for the dashboard, shows messages and reservations-->
-@extends('dashboard.layouts.base')
+@extends('admin.layouts.base')
 @section('content')
 
 <div class="container" style="width: 80%; padding-top: 30px;">
 	<h2 class="text-left my-3">
 		@if ($unreadMessages->isEmpty())
-			{{ __('headers.no_unread_messages') }}
+			{{ __('admin.no_unread_messages') }}
 		@else
-			{{ __('headers.unread_messages') }}
+			{{ __('admin.unread_messages') }}
 			<span class="badge text-bg-primary">{{ $unreadMessagesCount }}</span>
 		@endif
 	</h2>
 	
 	<div class="message-container">
 		@foreach ($unreadMessages as $message)
-			@include('dashboard.messageCard', ['message' => $message])
+			@include('admin.messageCard', ['message' => $message])
 		@endforeach
 		{{ $unreadMessages->links() }}
 	</div>

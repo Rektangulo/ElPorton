@@ -1,14 +1,15 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
-use App\Http\Requests\StoreTagRequest;
+use App\Http\Requests\Admin\StoreTagRequest;
 use App\Models\Tag;
 use App\Models\Image;
 use Illuminate\Support\Facades\Storage;
 use App\Services\ImageUploadService;
 use Illuminate\Http\RedirectResponse;
+use App\Http\Controllers\Controller;
 
 class TagController extends Controller
 {
@@ -22,7 +23,7 @@ class TagController extends Controller
 		$tags = Tag::select('id', 'name', 'image_id')->where('name', 'like', '%' . $search . '%')->paginate(10);
 		session()->put('previousUrl', request()->fullUrl());
 
-		return view('dashboard.layouts.index', ['title' => 'Tags',
+		return view('admin.index', ['title' => 'Tags',
 												'data' => $tags,
 												'headers' => $headers,
 											   ]);
@@ -35,9 +36,9 @@ class TagController extends Controller
     {
         $images = Image::all();
 		$attributes = ['name', 'image_id'];
-        return view('dashboard.layouts.create', ['attributes' => $attributes,
+        return view('admin.create', ['attributes' => $attributes,
 												 'resourceType' => 'tag',
-												 'nextRoute' => 'App\Http\Controllers\TagController@store',
+												 'nextRoute' => 'App\Http\Controllers\Admin\TagController@store',
 												 'images' => $images,
 											  ]);
     }
@@ -77,9 +78,9 @@ class TagController extends Controller
     public function show(Tag $tag)
     {
 		$images = Image::all();
-    	return view('dashboard.layouts.show', ['resource' => $tag,
+    	return view('admin.show', ['resource' => $tag,
 											   'resourceType' => 'tag',
-											   'nextRoute' => 'App\Http\Controllers\TagController@update', //?
+											   'nextRoute' => 'App\Http\Controllers\Admin\TagController@update', //?
 											   'images' => $images,
 											   'disabled' => '1'
 											  ]);
@@ -91,9 +92,9 @@ class TagController extends Controller
     public function edit(Tag $tag)
     {
 		$images = Image::all();
-    	return view('dashboard.layouts.show', ['resource' => $tag,
+    	return view('admin.show', ['resource' => $tag,
 											   'resourceType' => 'tag',
-											   'nextRoute' => 'App\Http\Controllers\TagController@update',
+											   'nextRoute' => 'App\Http\Controllers\Admin\TagController@update',
 											   'images' => $images,
 											  ]);
     }
@@ -130,7 +131,7 @@ class TagController extends Controller
     public function destroy(Tag $tag)
     {
 		$tag->delete();
-		session()->flash('success', trans('headers.deletedSuccess'));
+		session()->flash('success', __('admin.deletedSuccess'));
 		return redirect()->route('admin.tags.index');
     }
 }

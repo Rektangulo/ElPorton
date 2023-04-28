@@ -12,12 +12,12 @@ class FrontController extends Controller
 {
 	public function landing()
 	{
-		return view('landing');
+		return view('front.landing');
 	}
 	
 	public function cookie()
 	{
-		return view('cookies');
+		return view('front.cookies');
 	}
 	
     public function menu()
@@ -25,21 +25,21 @@ class FrontController extends Controller
         $categories = Category::with('menus')->get();
 		$recommendedMenus = Menu::where('recommended', true)->get();
 		
-        return view('menu', ['categories' => $categories,
+        return view('front.menu', ['categories' => $categories,
 							 'recommendedMenus' => $recommendedMenus,
 							]);
     }
 	
 	public function contact()
 	{
-		return view('contact');
+		return view('front.contact');
 	}
 	
 	public function submitContactForm(ContactFormRequest $request) {
 		
 		// Verify reCAPTCHA response
 		/*$response = Http::asForm()->post('https://www.google.com/recaptcha/api/siteverify', [
-			'secret' => '6LcarrMlAAAAANyzmgupmFkvWp7vccpYFpt1Pp7I',
+			'secret' => '',
 			'response' => $request->input('g-recaptcha-response')
 		]);
 

@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
-use App\Http\Requests\StoreCategoryRequest;
+use App\Http\Requests\Admin\StoreCategoryRequest;
 use App\Models\Category;
+use App\Http\Controllers\Controller;
 
 class CategoryController extends Controller
 {
@@ -18,7 +19,7 @@ class CategoryController extends Controller
 		$categories = Category::select('id', 'name')->where('name', 'like', '%' . $search . '%')->paginate(10);
 		session()->put('previousUrl', request()->fullUrl());
 
-		return view('dashboard.layouts.index', ['title' => 'Categories',
+		return view('admin.index', ['title' => 'Categories',
 												'data' => $categories,
 												'headers' => $headers,
 											   ]);
@@ -30,9 +31,9 @@ class CategoryController extends Controller
     public function create()
     {
 		$attributes = ['name'];
-        return view('dashboard.layouts.create', ['attributes' => $attributes,
+        return view('admin.create', ['attributes' => $attributes,
 												 'resourceType' => 'category',
-												 'nextRoute' => 'App\Http\Controllers\CategoryController@store',
+												 'nextRoute' => 'App\Http\Controllers\Admin\CategoryController@store',
 											  ]);
     }
 
@@ -53,9 +54,9 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
-    	return view('dashboard.layouts.show', ['resource' => $category,
+    	return view('admin.show', ['resource' => $category,
 											   'resourceType' => 'category',
-											   'nextRoute' => 'App\Http\Controllers\CategoryController@update',
+											   'nextRoute' => 'App\Http\Controllers\Admin\CategoryController@update',
 											   'disabled' => '1'
 											  ]);
     }
@@ -65,9 +66,9 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-    	return view('dashboard.layouts.show', ['resource' => $category,
+    	return view('admin.show', ['resource' => $category,
 											   'resourceType' => 'category',
-											   'nextRoute' => 'App\Http\Controllers\CategoryController@update',
+											   'nextRoute' => 'App\Http\Controllers\Admin\CategoryController@update',
 											  ]);
     }
 
@@ -87,7 +88,7 @@ class CategoryController extends Controller
     public function destroy(Category $category)
     {
         $category->delete();
-		session()->flash('success', trans('headers.deletedSuccess'));
+		session()->flash('success', __('admin.deletedSuccess'));
 		return redirect()->route('admin.categories.index');
     }
 }

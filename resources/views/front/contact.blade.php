@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('front.layout')
 @section('content')
 <style>
 	.form-control {
@@ -64,7 +64,7 @@
 			<textarea name="message" id="message" class="form-control rounded-0" rows="7" placeholder="{{ __('front.message_label') }}" required></textarea>
 		</div>
 		<div class="form-group mb-3">
-			<div class="g-recaptcha" data-sitekey="6LcarrMlAAAAAC1OIuxhuSBhuymc8wOs_JNGjchd"></div>
+			<div class="g-recaptcha" data-sitekey=""></div>
 		</div>
 		<div class="form-group mb-3 d-flex justify-content-center">
 			<!--id to redirect here if the message is sent-->
