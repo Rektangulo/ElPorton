@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FrontController;
 use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\Admin\ContactMessageController;
+use App\Http\Controllers\Admin\ReservationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,6 +19,9 @@ use App\Http\Controllers\Admin\ContactMessageController;
 */
 
 Route::get('/', [FrontController::class, 'landing']);
+Route::get('/reservation', [FrontController::class, 'reservation']);
+Route::post('/reservation', [FrontController::class, 'submitReservation']);
+Route::get('/reservation-success', [FrontController::class, 'reservationSuccess']);
 Route::get('/menu', [FrontController::class, 'menu']);
 Route::get('/contact', [FrontController::class, 'contact']);
 Route::post('/contact', [FrontController::class, 'submitContactForm']);
@@ -39,8 +43,9 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'admin' ], 
     Route::resource('tags', 'App\Http\Controllers\Admin\TagController');
     Route::resource('categories', 'App\Http\Controllers\Admin\CategoryController');
 	
-	/*messages*/
 	Route::get('/', [AdminDashboardController::class, 'landing']);
+	
+	/*messages*/
 	Route::get('/messages', [ContactMessageController::class, 'index']);
 	Route::post('/toggle-important', [ContactMessageController::class, 'toggleImportant']);
 	Route::post('/toggle-read', [ContactMessageController::class, 'toggleRead']);
@@ -49,6 +54,13 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'admin' ], 
 	Route::get('/show-read', [ContactMessageController::class, 'showRead']);
 	Route::get('/show-important', [ContactMessageController::class, 'showImportant']);
 	Route::get('/show-deleted', [ContactMessageController::class, 'showDeleted']);
+	
+	/*reservations*/
+	Route::get('/reservations', [ReservationController::class, 'index']);
+	Route::post('/reservations/{id}/accept', [ReservationController::class, 'acceptReservation']);
+	Route::post('/reservations/{id}/cancel', [ReservationController::class, 'cancelReservation']);
+	Route::get('/reservations/all', [ReservationController::class, 'showAllReservations']);
+	Route::get('/reservations/{status}', [ReservationController::class, 'showReservationsByStatus']);
 });
 
 Route::middleware('auth')->group(function () {

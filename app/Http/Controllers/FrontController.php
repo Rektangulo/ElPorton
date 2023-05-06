@@ -6,13 +6,46 @@ use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\ContactMessage;
 use App\Models\Menu;
+use App\Models\Reservation;
 use App\Http\Requests\ContactFormRequest;
+use App\Http\Requests\ReservationRequest;
 
 class FrontController extends Controller
 {
 	public function landing()
 	{
 		return view('front.landing');
+	}
+	
+	public function reservation()
+	{
+		return view('front.reservation');
+	}
+	
+	public function submitReservation(ReservationRequest $request) {
+		
+		$reservation = new Reservation;
+		$reservation->fill($request->validated());
+		$reservation->save();
+		
+		$request->session()->flash('reservation_id', $reservation->id);
+		$request->session()->flash('reservation_created', true);
+		
+		return redirect('/reservation-success');
+	}
+	
+	public function reservationSuccess(Request $request)
+	{
+		if ($request->session()->has('reservation_created')) {
+			
+			$reservation = Reservation::find($request->session()->get('reservation_id'));
+			return view('front.reservation-success')->with([
+				'reservation' => $reservation,
+			]);
+			
+		} else {
+			return redirect('/');
+		}
 	}
 	
 	public function cookie()

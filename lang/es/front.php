@@ -1,6 +1,27 @@
 <?php
 
 return [
+	/*Reservation*/
+    'reservation_title' => 'Reserva',
+    'number_label_required' => 'Número de teléfono:',
+    'phone_disclaimer' => 'Nos pondremos en contacto con usted el día de su reserva para confirmarla.',
+    'date_label' => 'Selecciona una fecha:',
+    'date_disclaimer' => 'Por favor selecciona una fecha entre mañana y 2 meses a partir de ahora.',
+	'guest_count' => 'Número de comensales:',
+    'time_label' => 'Selecciona una hora:',
+    'time_lunch' => 'Comida',
+    'time_dinner' => 'Cena',
+    'message_label_optional' => 'Mensaje (opcional):',
+    'confirm_reservation_button' => 'Reservar',
+	/*reservation feedback*/
+	'reservation_confirmed' => 'Reserva creada con éxito',
+    'thank_you_name' => 'Gracias por elegir nuestro restaurante, :name.',
+    'reservation_details' => 'Hemos guardado su reserva para el :date para la :time.',
+	'phone_reminder' => 'Le llamaremos el día de la reserva para confirmarla.',
+    'looking_forward' => 'Estamos ansiosos por atenderle y brindarle una experiencia inolvidable.',
+	'lunch' => 'comida',
+    'dinner' => 'cena',
+	'return' => 'Volver',
 	/*Terms*/
 	'terms_of_service' => 'Términos de Servicio',
     'welcome_to_our_restaurant' => '¡Bienvenido a nuestro restaurante! Al utilizar nuestros servicios, acepta los siguientes términos y condiciones:',

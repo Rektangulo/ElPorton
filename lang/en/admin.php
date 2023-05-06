@@ -31,6 +31,14 @@ return [
 				/*landing*/
 	'unread_messages' => 'Unread messages',
 	'no_unread_messages' => 'No unread messages',
+	'reservations_today' => 'Today\'s reservations',
+	'no_reservations_today' => 'No reservations for today',
+				/*reservations*/
+	'show_accepted' => 'Show accepted',
+	'show_canceled' => 'Show canceled',
+	'accepted' => 'Accepted',
+	'accept' => 'Accept',
+	'canceled' => 'Canceled',
 				/*messages*/
 	'show_all' => 'Show All',
 	'show_important' => 'Show Important',

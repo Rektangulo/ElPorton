@@ -31,6 +31,14 @@ return [
     /*landing*/
 	'unread_messages' => 'Mensajes no leídos',
     'no_unread_messages' => 'No hay mensajes no leídos',
+	'reservations_today' => 'Reservas de hoy',
+	'no_reservations_today' => 'No hay reservas hoy',
+	/*reservations*/
+	'show_accepted' => 'Aceptados',
+	'show_canceled' => 'Cancelados',
+	'accepted' => 'Aceptado',
+	'accept' => 'Aceptar',
+	'canceled' => 'Cancelado',
 	/*messages*/
 	'show_all' => 'Todos',
 	'show_important' => 'Importantes',
