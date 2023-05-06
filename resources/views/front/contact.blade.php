@@ -43,10 +43,10 @@
 	<form action="/contact" method="post">
 		@csrf
 		<div class="form-group mb-3">
-			<input type="text" name="name" id="name" value="{{ auth()->user()->name ?? '' }}" class="form-control rounded-0" placeholder="{{ __('front.name_label') }}" required>
+			<input type="text" name="name" id="name" class="form-control rounded-0" placeholder="{{ __('front.name_label') }}" required>
 		</div>
 		<div class="form-group mb-3">
-			<input type="email" name="email" id="email" value="{{ auth()->user()->email ?? '' }}" class="form-control rounded-0" placeholder="{{ __('front.email_label') }}" required>
+			<input type="email" name="email" id="email" class="form-control rounded-0" placeholder="{{ __('front.email_label') }}" required>
 		</div>
 		<div class="form-group mb-3">
 			<input type="number" name="number" id="number" class="form-control rounded-0" placeholder="{{ __('front.number_label') }}">

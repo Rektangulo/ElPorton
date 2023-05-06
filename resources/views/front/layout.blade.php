@@ -23,9 +23,6 @@
 					@if (Auth::user()->isAdmin())
 						<a class="nav-link mx-1" href="/admin">{{ __('front.admin') }}</a>
 					@endif
-				@else
-					<a class="nav-link mx-1" href="/login">{{ __('front.login') }}</a>
-					<a class="nav-link mx-1" href="/register">{{ __('front.register') }}</a>
 				@endif
             </div>
         </div>
@@ -47,8 +44,6 @@
 						<h4>{{ __('front.information') }}</h4>
 						<hr>
 						<ul class="list-unstyled larger-text">
-							<li><a href="/register">{{ __('front.register') }}</a></li>
-							<li><a href="/login">{{ __('front.login') }}</a></li>
 							<li><a href="/reservation">{{ __('front.make_reservation') }}</a></li>
 							<li><a href="/cookie-consent#terms">{{ __('front.terms_of_service') }}</a></li>
 							<li><a href="/cookie-consent#cookies">{{ __('front.cookie_consent') }}</a></li>
@@ -60,7 +55,6 @@
 						<ul class="list-unstyled larger-text">
 							<li>{{ __('front.hours') }}</li>
 							<li><a href="/contact#faq-section">{{ __('front.faq') }}</a></li>
-							<li><a href="/newsletter">{{ __('front.newsletter') }}</a></li>
 							<li><a href="/contact">{{ __('front.contact') }}</a></li>
 						</ul>
 					</div>
