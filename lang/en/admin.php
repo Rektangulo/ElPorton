@@ -17,7 +17,6 @@ return [
 	'yes' => 'Yes',
 	'no' => 'No',
 				/*navbar*/
-	'users' => 'Users',
 	'menus' => 'Menus',
 	'tags' => 'Tags',
 	'images' => 'Images',

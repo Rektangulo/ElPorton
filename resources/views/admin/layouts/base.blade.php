@@ -15,7 +15,6 @@
 				{{ __('admin.resources') }}
 			  </a>
 			  <ul class="dropdown-menu dropdown-menu-dark">
-				<li><a class="dropdown-item" href="/admin/users">{{ __('admin.users') }}</a></li>
 				<li><a class="dropdown-item" href="/admin/menus">{{ __('admin.menus') }}</a></li>
 				<li><a class="dropdown-item" href="/admin/images">{{ __('admin.images') }}</a></li>
 				<li><a class="dropdown-item" href="/admin/tags">{{ __('admin.tags') }}</a></li>
