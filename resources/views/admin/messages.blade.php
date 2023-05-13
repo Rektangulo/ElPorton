@@ -18,8 +18,10 @@
 		{{ $messages->links() }}
 	</div>
 </div>
-
+@stop
+@section('scripts')
 <script src="https://cdn.jsdelivr.net/npm/axios@0.24.0/dist/axios.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
     window.restoreText = '<?php echo __('admin.restore'); ?>';
     window.deleteText = '<?php echo __('admin.delete_icon'); ?>';

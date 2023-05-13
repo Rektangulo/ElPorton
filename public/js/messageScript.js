@@ -1,100 +1,100 @@
 function addCardListeners() {
-    document.querySelectorAll('.card').forEach(card => {
-        card.addEventListener('click', event => {
-            let target = event.target;
-            while (target !== card) {
-                if (target.tagName === 'BUTTON' || target.tagName === 'I') {
-                    return;
-                }
-                target = target.parentNode;
-            }
-            const messageDetails = card.querySelector('.message-details');
-            messageDetails.style.display = 'block';
-        });
+    $('.card').on('click', function(event) {
+        if (!$(event.target).is('button') && !$(event.target).is('i')) {
+            $(this).find('.message-details').slideToggle();
+        }
     });
 }
 
 function addMarkAsImportantListeners() {
-    document.querySelectorAll('.mark-as-important').forEach(button => {
-        button.addEventListener('click', () => {
-            const messageId = button.closest('.card').dataset.id;
-            axios.post('/admin/toggle-important', { messageId })
-                .then(response => {
-                    if (response.data.isImportant) {
-                        button.classList.remove('btn-secondary');
-                        button.classList.add('btn-warning');
-                    } else {
-                        button.classList.remove('btn-warning');
-                        button.classList.add('btn-secondary');
-                    }
-                });
-        });
+    $('.mark-as-important').on('click', function() {
+        const messageId = $(this).closest('.card').data('id');
+        axios.post('/admin/toggle-important', { messageId })
+            .then(response => {
+                if (response.data.isImportant) {
+                    $(this).removeClass('btn-secondary').addClass('btn-warning');
+                } else {
+                    $(this).removeClass('btn-warning').addClass('btn-secondary');
+                }
+            })
+            .catch(error => {
+                // Handle error response here
+                if (error.response && error.response.data && error.response.data.message) {
+                    alert(error.response.data.message);
+                } else {
+                    alert('An error occurred while marking the message as important.');
+                }
+            });
     });
 }
 
 function addMarkAsReadListeners() {
-    document.querySelectorAll('.mark-as-read').forEach(button => {
-        button.addEventListener('click', () => {
-            const messageId = button.closest('.card').dataset.id;
-            axios.post('/admin/toggle-read', { messageId })
-                .then(response => {
-                    if (response.data.isRead) {
-                        button.classList.remove('btn-primary');
-                        button.classList.add('btn-secondary');
-                        //icon
-                        const icon = button.querySelector('i');
-                        icon.classList.remove('fa-envelope');
-                        icon.classList.add('fa-envelope-open');
-                    } else {
-                        button.classList.remove('btn-secondary');
-                        button.classList.add('btn-primary');
+    $('.mark-as-read').on('click', function() {
+        const messageId = $(this).closest('.card').data('id');
+        axios.post('/admin/toggle-read', { messageId })
+            .then(response => {
+                if (response.data.isRead) {
+                    $(this).removeClass('btn-primary').addClass('btn-secondary');
+                    //icon
+                    const icon = $(this).find('i');
+                    icon.removeClass('fa-envelope').addClass('fa-envelope-open');
+                } else {
+                    $(this).removeClass('btn-secondary').addClass('btn-primary');
 
-                        const icon = button.querySelector('i');
-                        icon.classList.remove('fa-envelope-open');
-                        icon.classList.add('fa-envelope');
-                    }
-                });
-        });
+                    const icon = $(this).find('i');
+                    icon.removeClass('fa-envelope-open').addClass('fa-envelope');
+                }
+            })
+            .catch(error => {
+                // Handle error response here
+                if (error.response && error.response.data && error.response.data.message) {
+                    alert(error.response.data.message);
+                } else {
+                    alert('An error occurred while marking the message as read.');
+                }
+            });
     });
 }
 
 function addDeleteMessageListeners() {
-    document.querySelectorAll('.delete-message').forEach(button => {
-        button.addEventListener('click', () => {
-            // Toggle delete message
-            const messageId = button.closest('.card').dataset.id;
-            axios.post('/admin/toggle-delete', { messageId })
-                .then(response => {
-                    // Update UI
-                    const icon = button.querySelector('i');
-                    const textNode = button.lastChild;
-                    if (response.data.isDeleted) {
-                        textNode.textContent = window.restoreText;
-                        button.classList.remove('btn-danger');
-                        button.classList.add('btn-success');
-                        icon.classList.remove('fa-trash');
-                        icon.classList.add('fa-trash-restore');
-                    } else {
-                        textNode.textContent = window.deleteText;
-                        button.classList.remove('btn-success');
-                        button.classList.add('btn-danger');
-                        icon.classList.remove('fa-trash-restore');
-                        icon.classList.add('fa-trash');
-                    }
-                });
-        });
+    $('.delete-message').on('click', function() {
+        // Toggle delete message
+        const messageId = $(this).closest('.card').data('id');
+        axios.post('/admin/toggle-delete', { messageId })
+            .then(response => {
+                // Update UI
+                const icon = $(this).find('i');
+                const textNode = this.lastChild;
+                if (response.data.isDeleted) {
+                    textNode.textContent = window.restoreText;
+                    $(this).removeClass('btn-danger').addClass('btn-success');
+                    icon.removeClass('fa-trash').addClass('fa-trash-restore');
+                } else {
+                    textNode.textContent = window.deleteText;
+                    $(this).removeClass('btn-success').addClass('btn-danger');
+                    icon.removeClass('fa-trash-restore').addClass('fa-trash');
+                }
+            })
+            .catch(error => {
+                // Handle error response here
+                if (error.response && error.response.data && error.response.data.message) {
+                    alert(error.response.data.message);
+                } else {
+                    alert('An error occurred while deleting the message.');
+                }
+            });
     });
 }
 
 function addButtonEventListener(buttonSelector, url) {
-    const button = document.querySelector(buttonSelector);
-    if (button) {
-        button.addEventListener('click', () => {
+    const button = $(buttonSelector);
+    if (button.length > 0) {
+        button.on('click', function() {
             axios.get(url)
                 .then(response => {
                     const view = response.data.view;
-                    const messageContainer = document.querySelector('.message-container');
-                    messageContainer.innerHTML = view;
+                    const messageContainer = $('.message-container');
+                    messageContainer.html(view);
 
                     // Recall functions to set listeners again
                     addMarkAsImportantListeners();
@@ -106,7 +106,7 @@ function addButtonEventListener(buttonSelector, url) {
     }
 }
 
-window.addEventListener('load', () => {
+$(document).ready(function() {
 	addCardListeners();
     addMarkAsImportantListeners();
     addMarkAsReadListeners();

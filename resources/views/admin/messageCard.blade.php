@@ -21,9 +21,9 @@
 			<p class="card-text">{{ $message->message }}</p>
 		</div>
 		<div class="d-flex justify-content-end">
-			<button class="btn mx-1 mark-as-important {{ $message->important ? 'btn-warning' : 'btn-secondary' }}"><i class="fas fa-star"></i></button>
-			<button class="btn mx-1 mark-as-read {{ $message->read ? 'btn-secondary	' : 'btn-primary' }}"><i class="fas {{ $message->read ? 'fa-envelope-open' : 'fa-envelope' }}"></i></button>
-			<button class="btn mx-1 delete-message {{ $message->trashed() ? 'btn-success' : 'btn-danger' }}">
+			<button class="btn mx-1 mark-as-important message-details {{ $message->important ? 'btn-warning' : 'btn-secondary' }}" style="display: none;"><i class="fas fa-star"></i></button>
+			<button class="btn mx-1 mark-as-read message-details {{ $message->read ? 'btn-secondary	' : 'btn-primary' }}" style="display: none;"><i class="fas {{ $message->read ? 'fa-envelope-open' : 'fa-envelope' }}"></i></button>
+			<button class="btn mx-1 delete-message message-details {{ $message->trashed() ? 'btn-success' : 'btn-danger' }}" style="display: none;">
 				<i class="fas {{ $message->trashed() ? 'fa-trash-restore' : 'fa-trash' }}"></i>
 				{{ $message->trashed() ? __('admin.restore') : __('admin.delete') }}
 			</button>
