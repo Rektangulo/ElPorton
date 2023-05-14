@@ -14,6 +14,7 @@ return [
     'message_label_optional' => 'Mensaje (opcional):',
     'confirm_reservation_button' => 'Reservar',
 	/*reservation feedback*/
+	'reservation_limit_reached' => 'Se ha alcanzado el límite de reservas para esta fecha y hora.',
 	'reservation_confirmed' => 'Reserva creada con éxito',
     'thank_you_name' => 'Gracias por elegir nuestro restaurante, :name.',
     'reservation_details' => 'Hemos guardado su reserva para el :date para la :time.',

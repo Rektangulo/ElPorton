@@ -1,4 +1,3 @@
-<!--reservation form-->
 @php
     $currentLocale = app()->getLocale();
 @endphp
@@ -25,12 +24,6 @@
 		color: #000;
 	}
 	
-	.datepicker table tr td,
-	.datepicker table tr th {
-		font-size: 1.2rem;
-		padding: 0.3rem;
-	}
-
 	.form-control {
 		border: 2px solid;
 		border-image-slice: 1;
@@ -38,21 +31,35 @@
 		background-color: #343a40;
 		color: white;
 	}
+	
+	.datepicker table {
+		width: 100%;
+	}
+
+	.datepicker {
+		width: 350px;
+		margin: 0 auto;
+	}
+
+	.datepicker table tr td,
+	.datepicker table tr th {
+		width: auto;
+		height: auto;
+		font-size: 1.2rem;
+		padding: 0.3rem;
+	}
 
 	form {
 		width: 50%;
 		margin: 0 auto;
 	}
-
 	input::placeholder,
-	textarea::placeholder,
 	select {
 		color: darkgray !important;
 	}
 
 	input:focus,
-	select:focus,
-	textarea:focus {
+	select:focus {
 		color: white !important;
 		background-color: #343a40 !important;
 	}
@@ -68,39 +75,27 @@
 
 <!--form-->
 <div class="container form-container">
-	<h2 class="text-center mb-4">{{ __('front.reservation_title') }}</h2>
-	<form action="/reservation" method="post" class="mx-auto">
-		@csrf
+    <h2 class="text-center mb-4">{{ __('front.reservation_title') }}</h2>
+    <form action="/check-date" method="post" class="mx-auto">
+        @csrf
+        <div class="form-group mb-3">
+			<div class="form-group mb-3">
+				<div id="datepicker"></div>
+				<input type="hidden" name="date" id="date">
+			</div>
+            <small class="form-text text-white">{{ __('front.date_disclaimer') }}</small>
+        </div>
 		<div class="form-group mb-3">
-			<input type="text" name="name" id="name" class="form-control rounded-0" placeholder="{{ __('front.name_label') }}" value="{{ old('name') }}" required>
-		</div>
-		<div class="form-group mb-3">
-			<input type="email" name="email" id="email" class="form-control rounded-0" placeholder="{{ __('front.email_label') }}" value="{{ old('email') }}" required>
-		</div>
-		<div class="form-group mb-3">
-			<input type="number" name="number" id="number" class="form-control rounded-0" placeholder="{{ __('front.number_label_required') }}" value="{{ old('number') }}" required>
-			<small class="form-text text-white">{{ __('front.phone_disclaimer') }}</small>
-		</div>
-		<div class="form-group mb-3">
-			<input type="number" name="guest_count" id="guest_count" class="form-control rounded-0" placeholder="{{ __('front.guest_count') }}" value="{{ old('guest_count') }}" required>
-		</div>
-
-		<!-- Add a new form group for the datepicker -->
-		<div class="form-group mb-3">
-			<input type="text" name="date" id="date" class="form-control rounded-0" value="{{ old('date', request()->query('date')) }}" placeholder="{{ __('front.date_label') }}" autocomplete="off" required hidden>
-		</div>
-
-		<div class="form-group mb-3">
-			<input type="text" name="time" id="time" class="form-control rounded-0" value="{{ old('time', request()->query('time')) }}" placeholder="{{ __('front.time_label') }}" autocomplete="off" required hidden>
-		</div>
-
-		<div class="form-group mb-3">
-			<textarea name="message" id="message" class="form-control rounded-0" rows="7" placeholder="{{ __('front.message_label_optional') }}">{{ old('message') }}</textarea>
+			<select name="time" id="time" class="form-control rounded-0" required>
+				<option value="" disabled selected>{{ __('front.time_label') }}</option>
+				<option value="lunch">{{ __('front.time_lunch') }}</option>
+				<option value="dinner">{{ __('front.time_dinner') }}</option>
+			</select>
 		</div>
 		<div class="form-group mb-3 d-flex justify-content-center">
 			<button type="submit" class="btn btn-primary rounded-0">{{ __('front.send_button') }}</button>
 		</div>
-	</form>
+    </form>
 	<!--errors-->
 	@if ($errors->any())
 		<div class="alert alert-danger">
@@ -117,7 +112,6 @@
 </div>
 @stop
 
-
 @section('scripts')
 <!-- Add the necessary JavaScript to initialize the datepicker -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -129,20 +123,32 @@
 @endif
 <script>
     $(document).ready(function(){
-    	var startDate = new Date();
+		var startDate = new Date();
 		startDate.setDate(startDate.getDate() + 1); // Set start date to 24 hours from now
 
 		var endDate = new Date();
 		endDate.setMonth(endDate.getMonth() + 2); // Set end date to 2 months from now
 
-		$('.datepicker').datepicker({
-			format: 'dd/mm/yyyy',
-			startDate: startDate,
-			endDate: endDate,
-			startView: 1,
-			maxViewMode: 1,
-			language: '{{ $currentLocale }}'
-		});
+		var initialDate = '{{ old('date') }}' || startDate;
+		var startView = '{{ old('date') }}' ? 0 : 1;
+		
+		$('#datepicker').datepicker({
+            format: 'dd/mm/yyyy',
+            startDate: startDate,
+            endDate: endDate,
+            startView: startView,
+            maxViewMode: 1,
+            language: '{{ $currentLocale }}'
+        }).datepicker('setDate', initialDate).on('changeDate', function(e) {
+            $('#date').val(e.format());
+        });
 	});
+	if ('{{ old('date') }}') {
+        $('#date').val('{{ old('date') }}');
+    }
+	window.addEventListener('DOMContentLoaded', function() {
+        var timeSelect = document.getElementById('time');
+        timeSelect.value = '{{ old('time') }}';
+    });
 </script>
 @stop

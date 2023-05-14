@@ -14,6 +14,7 @@ return [
 	'message_label_optional' => 'Message (optional):',
 	'confirm_reservation_button' => 'Reserve',
 						/*reservation feedback*/
+	'reservation_limit_reached' => 'The reservation limit has been reached for this date and time.',
 	'reservation_confirmed' => 'Reservation Confirmed',
     'thank_you_name' => 'Thank you for choosing our restaurant, :name!',
     'reservation_details' => 'Your reservation has been confirmed for :date at :time.',

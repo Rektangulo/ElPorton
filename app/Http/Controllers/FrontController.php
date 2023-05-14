@@ -9,12 +9,33 @@ use App\Models\Menu;
 use App\Models\Reservation;
 use App\Http\Requests\ContactFormRequest;
 use App\Http\Requests\ReservationRequest;
+use App\Services\ReservationDateService;
+use Log;
 
 class FrontController extends Controller
 {
 	public function landing()
 	{
 		return view('front.landing');
+	}
+	
+	public function showCalendar()
+	{
+		return view('front.reservation-calendar');
+	}
+	
+	public function checkDate(Request $request)
+	{
+		$date = $request->input('date');
+		$time = $request->input('time');
+
+		Log::info($date);
+		if (!ReservationDateService::isReservationLimitReached($date, $time)) {
+			return redirect('/reservations?date=' . $date . '&time=' . $time);
+		} else {
+			// show error message
+			return redirect('/reservation')->withInput()->withErrors(['date' => __('front.reservation_limit_reached')]);
+		}
 	}
 	
 	public function reservation()

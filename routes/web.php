@@ -19,7 +19,9 @@ use App\Http\Controllers\Admin\ReservationController;
 */
 
 Route::get('/', [FrontController::class, 'landing']);
-Route::get('/reservation', [FrontController::class, 'reservation']);
+Route::get('/reservation', [FrontController::class, 'showCalendar']);
+Route::post('/check-date', [FrontController::class, 'checkDate']);
+Route::get('/reservations', [FrontController::class, 'reservation']);
 Route::post('/reservation', [FrontController::class, 'submitReservation']);
 Route::get('/reservation-success', [FrontController::class, 'reservationSuccess']);
 Route::get('/menu', [FrontController::class, 'menu']);
