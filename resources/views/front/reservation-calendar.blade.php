@@ -38,7 +38,6 @@
 
 	.datepicker {
 		width: 350px;
-		margin: 0 auto;
 	}
 
 	.datepicker table tr td,
@@ -78,37 +77,37 @@
     <h2 class="text-center mb-4">{{ __('front.reservation_title') }}</h2>
     <form action="/check-date" method="post" class="mx-auto">
         @csrf
-        <div class="form-group mb-3">
-			<div class="form-group mb-3">
-				<div id="datepicker"></div>
-				<input type="hidden" name="date" id="date">
-			</div>
+        <div class="form-group mb-3 d-flex justify-content-center">
+            <div id="datepicker"></div>
+            <input type="hidden" name="date" id="date">
+        </div>
+        <div class="form-group mb-3 d-flex justify-content-center">
             <small class="form-text text-white">{{ __('front.date_disclaimer') }}</small>
         </div>
-		<div class="form-group mb-3">
-			<select name="time" id="time" class="form-control rounded-0" required>
-				<option value="" disabled selected>{{ __('front.time_label') }}</option>
-				<option value="lunch">{{ __('front.time_lunch') }}</option>
-				<option value="dinner">{{ __('front.time_dinner') }}</option>
-			</select>
-		</div>
-		<div class="form-group mb-3 d-flex justify-content-center">
-			<button type="submit" class="btn btn-primary rounded-0">{{ __('front.send_button') }}</button>
-		</div>
+        <div class="form-group mb-3">
+            <select name="time" id="time" class="form-control rounded-0" required>
+                <option value="" disabled selected>{{ __('front.time_label') }}</option>
+                <option value="lunch">{{ __('front.time_lunch') }}</option>
+                <option value="dinner">{{ __('front.time_dinner') }}</option>
+            </select>
+        </div>
+        <div class="form-group mb-3 d-flex justify-content-center">
+            <button type="submit" class="btn btn-primary rounded-0">{{ __('front.send_button') }}</button>
+        </div>
     </form>
-	<!--errors-->
-	@if ($errors->any())
-		<div class="alert alert-danger">
-			<ul>
-				@foreach ($errors->all() as $error)
-					<li>{{ $error }}</li>
-				@endforeach
-				@if (old('image'))
-					<li>{{ __('admin.file_error') }}</li>
-				@endif
-			</ul>
-		</div>
-	@endif
+    <!--errors-->
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+                @if (old('image'))
+                    <li>{{ __('admin.file_error') }}</li>
+                @endif
+            </ul>
+        </div>
+    @endif
 </div>
 @stop
 
