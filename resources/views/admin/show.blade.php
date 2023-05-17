@@ -4,9 +4,7 @@
 		- 'resource': the resource to show, using Resource::find($id)
 		- 'resourceType': the name of the resource, to build the action
 		- 'nextRoute': controller@method
-		- 'images': list of all image models
 		- 'showTags': show tag html
-		- 'tags': all tag instances
 -->
 @extends('admin.layouts.base')
 @section('content')
@@ -60,7 +58,7 @@
 								<option value="">{{ __('admin.none') }}</option>
 							@endif
 							<option value="">{{ __('admin.select_prompt') }}</option>
-							@foreach (\App\Models\Category::all() as $category)
+							@foreach ($categories as $category)
 								<option value="{{ $category->id }}" {{ $category->id == old($attribute, $value) ? 'selected' : '' }}>{{ $category->name }}</option>
 							@endforeach
 						</select>

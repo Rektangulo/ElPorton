@@ -3,7 +3,6 @@
 		- 'attributes': the fields to show
 		- 'resourceType': the name of the resource, to build the action
 		- 'nextRoute': controller@method
-		- 'images': list of all image models
 -->
 @extends('admin.layouts.base')
 @section('content')
@@ -44,7 +43,7 @@
 					@elseif ($attribute === 'category_id')
 						<select id="{{ $attribute }}" name="{{ $attribute }}" class="form-select form-select-lg">
 							<option value="">{{ __('admin.select_prompt') }}</option>
-							@foreach (\App\Models\Category::all() as $category)
+							@foreach ($categories as $category)
 								<option value="{{ $category->id }}" {{ $category->id == old($attribute) ? 'selected' : '' }}>{{ $category->name }}</option>
 							@endforeach
 						</select>

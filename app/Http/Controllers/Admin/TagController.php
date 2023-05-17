@@ -34,12 +34,10 @@ class TagController extends Controller
      */
     public function create()
     {
-        $images = Image::all();
 		$attributes = ['name', 'image_id'];
         return view('admin.create', ['attributes' => $attributes,
 												 'resourceType' => 'tag',
 												 'nextRoute' => 'App\Http\Controllers\Admin\TagController@store',
-												 'images' => $images,
 											  ]);
     }
 
@@ -77,11 +75,9 @@ class TagController extends Controller
      */
     public function show(Tag $tag)
     {
-		$images = Image::all();
     	return view('admin.show', ['resource' => $tag,
 											   'resourceType' => 'tag',
 											   'nextRoute' => 'App\Http\Controllers\Admin\TagController@update', //?
-											   'images' => $images,
 											   'disabled' => '1'
 											  ]);
     }
@@ -91,11 +87,9 @@ class TagController extends Controller
      */
     public function edit(Tag $tag)
     {
-		$images = Image::all();
     	return view('admin.show', ['resource' => $tag,
 											   'resourceType' => 'tag',
 											   'nextRoute' => 'App\Http\Controllers\Admin\TagController@update',
-											   'images' => $images,
 											  ]);
     }
 

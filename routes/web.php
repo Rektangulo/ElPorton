@@ -18,6 +18,7 @@ use App\Http\Controllers\Admin\ReservationController;
 |
 */
 
+/*user zone*/
 Route::get('/', [FrontController::class, 'landing']);
 Route::get('/reservation', [FrontController::class, 'showCalendar']);
 Route::post('/check-date', [FrontController::class, 'checkDate']);
@@ -29,23 +30,23 @@ Route::get('/contact', [FrontController::class, 'contact']);
 Route::post('/contact', [FrontController::class, 'submitContactForm']);
 Route::get('/cookie-consent', [FrontController::class, 'cookie']);
 
+/*language*/
 Route::get('/language/{locale}', function ($locale) {
     App::setLocale($locale);
     session()->put('locale', $locale);
     return redirect()->back();
 })->name('language.switch');
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
-
+/*admin zone*/
 Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'admin' ], function () {
+	
+	Route::get('/', [AdminDashboardController::class, 'landing']);
+	
+	/*resources*/
     Route::resource('menus', 'App\Http\Controllers\Admin\MenuController');
     Route::resource('images', 'App\Http\Controllers\Admin\ImageController');
     Route::resource('tags', 'App\Http\Controllers\Admin\TagController');
     Route::resource('categories', 'App\Http\Controllers\Admin\CategoryController');
-	
-	Route::get('/', [AdminDashboardController::class, 'landing']);
 	
 	/*messages*/
 	Route::get('/messages', [ContactMessageController::class, 'index']);
@@ -65,10 +66,15 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'admin' ], 
 	Route::get('/reservations/{status}', [ReservationController::class, 'showReservationsByStatus']);
 });
 
+/*Laravel breeze*/
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
 
 require __DIR__.'/auth.php';

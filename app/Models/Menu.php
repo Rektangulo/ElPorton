@@ -20,6 +20,16 @@ class Menu extends Model
 		"recommended",
 	];
 	
+	public function scopeSearch($query, $search)
+	{
+		return $query->where('name', 'like', '%' . $search . '%');
+	}
+	
+	public function updateTags(array $tags)
+	{
+		$this->tags()->sync($tags);
+	}
+	
 	public function image()
 	{
 		return $this->belongsTo(Image::class);
