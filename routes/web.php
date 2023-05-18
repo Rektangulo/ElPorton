@@ -62,8 +62,9 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'admin' ], 
 	Route::get('/reservations', [ReservationController::class, 'index']);
 	Route::post('/reservations/{id}/accept', [ReservationController::class, 'acceptReservation']);
 	Route::post('/reservations/{id}/cancel', [ReservationController::class, 'cancelReservation']);
-	Route::get('/reservations/all', [ReservationController::class, 'showAllReservations']);
-	Route::get('/reservations/{status}', [ReservationController::class, 'showReservationsByStatus']);
+	Route::get('/reservations/{status}/date/{date}', [ReservationController::class, 'showReservationsByStatusAndDate']);
+	Route::get('/reservations/{status}', [ReservationController::class, 'showReservationsByStatus'])->where('status', 'all|accepted|canceled|pending');
+	Route::get('/reservations/date/{date}', [ReservationController::class, 'showReservationsByDate']);
 });
 
 /*Laravel breeze*/

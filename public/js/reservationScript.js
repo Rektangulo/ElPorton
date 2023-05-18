@@ -32,11 +32,50 @@ function setupEventListeners() {
 
 setupEventListeners();
 
-$('.filter-accepted, .filter-canceled, .show-all').on('click', function() {
-	var status = $(this).hasClass('filter-accepted') ? 'accepted' : ($(this).hasClass('filter-canceled') ? 'canceled' : 'all');
-	axios.get('/admin/reservations/' + status)
-		.then(function(response) {
-			$('.reservation-container').html(response.data);
-			setupEventListeners();
-		});
+var currentStatus = 'all';
+var currentDate = null;
+
+$('.reset-date').on('click', function() {
+    currentStatus = 'all';
+    currentDate = null;
+    $('#search-date').val('');
+    getReservations(currentStatus);
 });
+
+$('.filter-accepted, .filter-canceled, .show-all, .filter-pending').on('click', function() {
+    currentStatus = $(this).hasClass('filter-accepted') ? 'accepted' : ($(this).hasClass('filter-canceled') ? 'canceled' : ($(this).hasClass('filter-pending') ? 'pending' : 'all'));
+    getReservations(currentStatus, 1, currentDate);
+});
+
+$('.search-by-date').on('click', function() {
+    var date = new Date($('#search-date').val());
+    currentDate = date.getFullYear() + '-' + (date.getMonth() + 1).toString().padStart(2, '0') + '-' + date.getDate().toString().padStart(2, '0');
+    currentStatus = null;
+    getReservations(null, 1, currentDate);
+});
+
+$(document).on('click', '.page-link', function(event) {
+    event.preventDefault();
+    var page = $(this).attr('href').split('page=')[1];
+    getReservations(currentStatus, page, currentDate);
+});
+
+function getReservations(status = null, page = 1, date = null) {
+    var url = '/admin/reservations/';
+    if (status && date) {
+        url += status + '/date/' + date;
+    } else if (status) {
+        url += status;
+    } else if (date) {
+        url += 'date/' + date;
+    }
+    url += '?page=' + page;
+    axios.get(url)
+        .then(function(response) {
+            $('.reservation-container').html(response.data);
+            setupEventListeners();
+        });
+}
+
+
+

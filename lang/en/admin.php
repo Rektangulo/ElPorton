@@ -38,6 +38,9 @@ return [
 	'accepted' => 'Accepted',
 	'accept' => 'Accept',
 	'canceled' => 'Canceled',
+	'show_pending' => 'Show pending',
+	'search_by_date' => 'Search by date',
+	'reset_date' => 'Reset date',
 				/*messages*/
 	'show_all' => 'Show All',
 	'show_important' => 'Show Important',
