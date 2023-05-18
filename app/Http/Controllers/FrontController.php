@@ -91,17 +91,6 @@ class FrontController extends Controller
 	
 	public function submitContactForm(ContactFormRequest $request) {
 		
-		// Verify reCAPTCHA response
-		/*$response = Http::asForm()->post('https://www.google.com/recaptcha/api/siteverify', [
-			'secret' => '',
-			'response' => $request->input('g-recaptcha-response')
-		]);
-
-		if (! $response->json()['success']) {
-			// reCAPTCHA verification failed
-			return redirect('/contact')->withErrors(['captcha' => 'reCAPTCHA verification failed']);
-		}*/
-		
 		$message = new ContactMessage;
 		$message->fill($request->validated());
 		$message->save();

@@ -10,7 +10,7 @@ class ReservationController extends Controller
 {
     public function index(Request $request)
     {
-		$reservations = Reservation::orderBy('created_at')->paginate(10);
+		$reservations = Reservation::orderBy('date')->paginate(10);
         return view('admin.reservations', ['reservations' => $reservations]);
     }
 	
@@ -34,7 +34,7 @@ class ReservationController extends Controller
 	
 	public function showReservationsByDate($date)
 	{
-		$reservations = Reservation::whereDate('date', $date)->paginate(10);
+		$reservations = Reservation::whereDate('date', $date)->orderBy('date')->paginate(10);
 		$reservations->setPath('/admin/reservations');
 		return view('admin.reservationRender', ['reservations' => $reservations]);
 	}
@@ -42,13 +42,13 @@ class ReservationController extends Controller
 	public function showReservationsByStatus($status)
 	{
 		if ($status === 'all') {
-			$reservations = Reservation::paginate(10);
+			$reservations = Reservation::orderBy('date')->paginate(10);
 		} elseif ($status === 'accepted') {
-			$reservations = Reservation::where('status', 'accepted')->paginate(10);
+			$reservations = Reservation::where('status', 'accepted')->orderBy('date')->paginate(10);
 		} elseif ($status === 'canceled') {
-			$reservations = Reservation::where('status', 'canceled')->paginate(10);
+			$reservations = Reservation::where('status', 'canceled')->orderBy('date')->paginate(10);
 		} elseif ($status === 'pending') {
-			$reservations = Reservation::whereNull('status')->paginate(10);
+			$reservations = Reservation::whereNull('status')->orderBy('date')->paginate(10);
 		}
 
 		$reservations->setPath('/admin/reservations');
@@ -58,13 +58,13 @@ class ReservationController extends Controller
 	public function showReservationsByStatusAndDate($status, $date)
 	{
 		if ($status === 'all') {
-			$reservations = Reservation::whereDate('date', $date)->paginate(10);
+			$reservations = Reservation::whereDate('date', $date)->orderBy('date')->paginate(10);
 		} elseif ($status === 'accepted') {
-			$reservations = Reservation::where('status', 'accepted')->whereDate('date', $date)->paginate(10);
+			$reservations = Reservation::where('status', 'accepted')->whereDate('date', $date)->orderBy('date')->paginate(10);
 		} elseif ($status === 'canceled') {
-			$reservations = Reservation::where('status', 'canceled')->whereDate('date', $date)->paginate(10);
+			$reservations = Reservation::where('status', 'canceled')->whereDate('date', $date)->orderBy('date')->paginate(10);
 		} elseif ($status === 'pending') {
-			$reservations = Reservation::whereNull('status')->whereDate('date', $date)->paginate(10);
+			$reservations = Reservation::whereNull('status')->whereDate('date', $date)->orderBy('date')->paginate(10);
 		}
 
 		$reservations->setPath('/admin/reservations');

@@ -16,9 +16,14 @@ class AdminDashboardController extends Controller
     public function landing(Request $request)
     {
 		$todaysReservationsCount = Reservation::whereDate('date', Carbon::today())->count();
-		$todaysReservations = Reservation::whereDate('date', Carbon::today())->orderBy('created_at')->paginate(7);
 		$unreadMessagesCount = ContactMessage::where('read', false)->count();
-		$unreadMessages = ContactMessage::where('read', false)->orderBy('created_at', 'desc')->paginate(3);
+		
+		//$todaysReservations = Reservation::whereDate('date', Carbon::today())->orderBy('created_at')->paginate(7);
+		//$unreadMessages = ContactMessage::where('read', false)->orderBy('created_at', 'desc')->paginate(3);
+		
+		$todaysReservations = Reservation::whereDate('date', Carbon::today())->orderBy('created_at')->paginate(7, ['*'], 'reservationsPage');
+		$unreadMessages = ContactMessage::where('read', false)->orderBy('created_at', 'desc')->paginate(3, ['*'], 'messagesPage');
+		
         return view('admin.landing', ['unreadMessages' => $unreadMessages,
 									  'unreadMessagesCount' => $unreadMessagesCount,
 									  'todaysReservations' => $todaysReservations,

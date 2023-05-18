@@ -17,7 +17,7 @@
 		@foreach ($unreadMessages as $message)
 			@include('admin.messageCard', ['message' => $message])
 		@endforeach
-		{{ $unreadMessages->links() }}
+		{{ $unreadMessages->appends(['reservationsPage' => $todaysReservations->currentPage()])->links() }}
 	</div>
 	
 	<!--reservations-->
@@ -29,12 +29,14 @@
 			<span class="badge text-bg-primary">{{ $todaysReservationsCount }}</span>
 		@endif
 	</h2>
-
 	<div class="reservation-container">
-		@foreach ($todaysReservations as $reservation)
-			@include('admin.reservationCard', ['reservation' => $reservation])
-		@endforeach
-		{{ $todaysReservations->links() }}
+		@if (!$todaysReservations->isEmpty())
+			@foreach ($todaysReservations as $reservation)
+				@include('admin.reservationCard', ['reservation' => $reservation])
+			@endforeach
+			
+			{{ $todaysReservations->appends(['messagesPage' => $unreadMessages->currentPage()])->links() }}
+		@endif
 	</div>
 </div>
 

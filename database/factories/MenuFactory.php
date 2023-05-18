@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class MenuFactory extends Factory
 {
+	protected $model = \App\Models\Menu::class;
     /**
      * Define the model's default state.
      *

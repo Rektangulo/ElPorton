@@ -18,7 +18,9 @@
 		@foreach ($reservations as $reservation)
 			@include('admin.reservationCard', ['reservation' => $reservation])
 		@endforeach
-		{{ $reservations->links() }}
+		<div class="custom-pagination">
+			{{ $reservations->links() }}
+		</div>
 	</div>
 </div>
 @stop
